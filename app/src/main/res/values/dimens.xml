@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="max_username_length">16</integer>
+    <integer name="max_password_length">20</integer>
+
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="activity_login_side_padding">24dp</dimen>
+    <dimen name="login_logo_margin_bottom">64dp</dimen>
+    <dimen name="logintext_top_margin">8dp</dimen>
+    <dimen name="logintext_bottom_margin">8dp</dimen>
+
+
+</resources>

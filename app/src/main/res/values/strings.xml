@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">Chain Reaction</string>
+
+    <string name="title_chain">Chain</string>
+    <string name="title_reaction">Reaction</string>
+
+    <string name="prompt_username">Username</string>
+    <string name="prompt_password">Password</string>
+    <string name="prompt_retype_password">Retype Password</string>
+
+    <string name="login">Login</string>
+    <string name="play_offline">Play Offline</string>
+    <string name="login_register">No account? Register or play offline</string>
+
+    <string name="create_account">Create Account</string>
+    <string name="register_login">Already have an account? Login</string>
+    <string name="title_activity_signin">Sign in</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_username">This username does not exist</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+
+</resources>
