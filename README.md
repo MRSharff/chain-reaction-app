@@ -23,7 +23,7 @@ Example:
 | Bee     | Bee     | Bee     | Bee     | Bee     | Bee     |
 
 
-## Features
+## Planned Features
 
 + Offline play for both single player and two player
 + Online play
