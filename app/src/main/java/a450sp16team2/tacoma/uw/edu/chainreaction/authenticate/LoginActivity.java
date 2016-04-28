@@ -1,4 +1,4 @@
-package a450sp16team2.tacoma.uw.edu.chainreaction;
+package a450sp16team2.tacoma.uw.edu.chainreaction.authenticate;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -23,6 +23,8 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import a450sp16team2.tacoma.uw.edu.chainreaction.R;
 
 public class LoginActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
@@ -75,7 +77,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderManager.Lo
             }
         });
 
-//        mLoginFormVew
+        mLoginFormVew = findViewById(R.id.login_form);
+        mProgressView = findViewById(R.id.login_progress);
     }
 
 
@@ -134,12 +137,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderManager.Lo
     }
 
     private boolean isUsernameValid(String username) {
-        //TODO: Replace this with your own logic
         return username.length() > 3;
     }
 
     private boolean isPasswordValid(String password) {
-        //TODO: Replace this with your own
         return password.length() > 4;
     }
 

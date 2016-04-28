@@ -8,18 +8,20 @@
     android:gravity="center_horizontal"
     android:orientation="vertical"
     android:paddingTop="48dp"
-    tools:context="a450sp16team2.tacoma.uw.edu.chainreaction.LoginActivity">
+    tools:context=".authenticate.LoginActivity">
 
     <!-- Login progress -->
+
     <ProgressBar
         android:id="@+id/login_progress"
-        style="?android:attr/progressBarStyleLarge"
+        style="?android:attr/progressBarStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:visibility="gone" />
 
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/login_form"
         android:background="@color/colorPrimary"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
@@ -28,6 +30,7 @@
         android:fitsSystemWindows="true">
 
         <LinearLayout
+            android:id="@+id/username_login_form"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
