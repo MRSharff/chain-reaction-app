@@ -23,6 +23,10 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".GameActivity"
+            android:label="GameActivity"
+            android:theme="@style/AppTheme"/>
+        <activity
             android:name=".HomeActivity"
             android:label="@string/title_activity_home"
             android:theme="@style/AppTheme">
