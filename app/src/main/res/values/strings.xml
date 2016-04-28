@@ -29,4 +29,12 @@
     </string>
     <string name="title_activity_home">HomeActivity</string>
 
+    <!-- Strings related to home screen -->
+    <string name="single_player">Single Player</string>
+    <string name="two_player">Two Player</string>
+    <string name="online">Online</string>
+    <string name="offline">Offline</string>
+    <string name="highscores">Highscores</string>
+    <string name="Settings">Settings</string>
+
 </resources>

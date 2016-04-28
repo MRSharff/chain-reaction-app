@@ -3,6 +3,8 @@ package a450sp16team2.tacoma.uw.edu.chainreaction.authenticate;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -24,6 +26,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import a450sp16team2.tacoma.uw.edu.chainreaction.HomeActivity;
 import a450sp16team2.tacoma.uw.edu.chainreaction.R;
 
 public class LoginActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
@@ -130,7 +133,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderManager.Lo
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
             showProgress(true);
-            mAuthTask = new UserLoginTask(username, password);
+            mAuthTask = new UserLoginTask(username, password, this);
             mAuthTask.execute((Void) null);
         }
 
@@ -234,9 +237,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderManager.Lo
         private final String mUsername;
         private final String mPassword;
 
-        UserLoginTask(String username, String password) {
+        private Context mContext;
+
+        public UserLoginTask(String username, String password, Context context) {
             mUsername = username;
             mPassword = password;
+            mContext = context;
         }
 
         @Override
@@ -268,6 +274,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderManager.Lo
             showProgress(false);
 
             if (success) {
+                Intent intent = new Intent(mContext, HomeActivity.class);
+                startActivity(intent);
                 finish();
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
