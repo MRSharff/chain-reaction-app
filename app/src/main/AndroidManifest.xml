@@ -25,7 +25,7 @@
         <activity
             android:name=".GameActivity"
             android:label="GameActivity"
-            android:theme="@style/AppTheme"/>
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".HomeActivity"
             android:label="@string/title_activity_home"
@@ -36,6 +36,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".GameSettingsActivity"></activity>
     </application>
 
 </manifest>

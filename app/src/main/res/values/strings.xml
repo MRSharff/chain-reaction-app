@@ -37,4 +37,13 @@
     <string name="highscores">Highscores</string>
     <string name="Settings">Settings</string>
 
+    <!-- Strings related to difficulty settings -->
+    <string name="difficulty">Difficulty</string>
+    <string-array name="classic_difficulty">
+        <item>Easy</item>
+        <item>Medium</item>
+        <item>Hard</item>
+    </string-array>
+
+
 </resources>
