@@ -39,7 +39,14 @@
 
     <!-- Strings related to difficulty settings -->
     <string name="difficulty">Difficulty</string>
+    <string name="mode">Mode</string>
     <string-array name="classic_difficulty">
+        <item>Easy</item>
+        <item>Medium</item>
+        <item>Hard</item>
+    </string-array>
+
+    <string-array name="game_modes">
         <item>Easy</item>
         <item>Medium</item>
         <item>Hard</item>

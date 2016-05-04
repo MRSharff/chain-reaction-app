@@ -12,21 +12,11 @@
     android:rowCount="6"
     tools:context="a450sp16team2.tacoma.uw.edu.chainreaction.GameSettingsActivity">
 
-    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/difficulty_spinner_textview"
-        style="?android:attr/spinnerItemStyle"
-        android:textSize="25sp"
-        android:singleLine="true"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ellipsize="marquee"
-        android:visibility="gone"/>
-
 
     <TextView
         android:layout_column="0"
         android:layout_row="0"
-        android:layout_gravity="center_horizontal"
+        android:layout_gravity="right"
         android:text="@string/difficulty"
         android:textSize="25sp"
         android:layout_columnWeight="1" />
@@ -36,6 +26,21 @@
         android:layout_column="1"
         android:layout_gravity="left"
         android:id="@+id/difficulty_spinner"
+        android:layout_columnWeight="1" />
+
+    <TextView
+        android:layout_column="0"
+        android:layout_row="1"
+        android:layout_gravity="right"
+        android:text="@string/mode"
+        android:textSize="25sp"
+        android:layout_columnWeight="1" />
+
+    <android.support.v7.widget.AppCompatSpinner
+        android:layout_row="1"
+        android:layout_column="1"
+        android:layout_gravity="left"
+        android:id="@+id/mode_spinner"
         android:layout_columnWeight="1" />
 
 </GridLayout>
