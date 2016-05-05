@@ -5,28 +5,23 @@ import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ListView;
 
 import a450sp16team2.tacoma.uw.edu.chainreaction.model.ChainWord;
 
 public class GameActivity extends AppCompatActivity implements ChainWordFragment.OnListFragmentInteractionListener{
 
     private String mGuess;
-    private ChainWordFragment mList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
-        mList = (ChainWordFragment) getSupportFragmentManager().findFragmentById(R.id.list1);
     }
 
     @Override
-    public void onListFragmentInteraction(final ChainWord word) {
+    public void onListFragmentInteraction(final ChainWord word, final MyChainWordRecyclerViewAdapter myChainWordRecyclerViewAdapter) {
         // get prompts.xml view
         LayoutInflater li = (LayoutInflater)getApplicationContext().getSystemService
                 (Context.LAYOUT_INFLATER_SERVICE);
@@ -49,15 +44,19 @@ public class GameActivity extends AppCompatActivity implements ChainWordFragment
                                 // get user input and set it to result
                                 // edit text
                                 mGuess = userInput.getText().toString();
-                                if (!word.isRevealed && !word.guess(mGuess)) {
+                                dialog.dismiss();
+                                if (!word.guess(mGuess) && !word.isRevealed) {
                                     word.revealLetter();
                                 }
-                                //Need to figure out how to update the recyclerView
-                                //mList.mRecyclerView.invalidate();
-                                dialog.cancel();
                             }
                         });
-
+        alertDialogBuilder.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                myChainWordRecyclerViewAdapter.notifyDataSetChanged();
+                myChainWordRecyclerViewAdapter.update();
+            }
+        });
         // create alert dialog
         AlertDialog alertDialog = alertDialogBuilder.create();
 
