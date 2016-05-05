@@ -10,6 +10,7 @@
     <dimen name="login_logo_margin_bottom">64dp</dimen>
     <dimen name="logintext_top_margin">8dp</dimen>
     <dimen name="logintext_bottom_margin">8dp</dimen>
+    <dimen name="text_margin">16dp</dimen>
 
 
 </resources>

@@ -40,7 +40,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void startSinglePlayer() {
-        Intent intent = new Intent(this, GameSettingsActivity.class);
+        Intent intent = new Intent(this, GameActivity.class);
         startActivity(intent);
     }
 

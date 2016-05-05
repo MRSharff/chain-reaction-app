@@ -7,11 +7,20 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     tools:context="a450sp16team2.tacoma.uw.edu.chainreaction.GameActivity">
+    <fragment
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/words_list"
+        android:name="a450sp16team2.tacoma.uw.edu.chainreaction.ChainWordFragment"
+        android:layout_weight="2"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/word_list"/>
+        android:padding="16dp"
+        android:text="Score"
+        android:textSize="36dp"
+        android:layout_weight="1"/>
 
 </LinearLayout>
