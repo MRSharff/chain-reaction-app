@@ -5,7 +5,7 @@
     android:layout_marginBottom="16dp"
     android:orientation="horizontal"
     android:background="@color/textColorSecondary"
-    android:id="@+id/list">
+    android:id="@+id/list_item">
 
     <TextView
         android:id="@+id/content"

@@ -5,15 +5,13 @@ import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ListView;
 
-import java.io.IOException;
-
-import Model.WordListGenerator;
 import a450sp16team2.tacoma.uw.edu.chainreaction.model.ChainWord;
 
 public class GameActivity extends AppCompatActivity implements ChainWordFragment.OnListFragmentInteractionListener{
@@ -23,8 +21,8 @@ public class GameActivity extends AppCompatActivity implements ChainWordFragment
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mList = (ChainWordFragment) getSupportFragmentManager().findFragmentById(R.id.list);
         setContentView(R.layout.activity_game);
+        mList = (ChainWordFragment) getSupportFragmentManager().findFragmentById(R.id.list1);
     }
 
     @Override
@@ -54,6 +52,8 @@ public class GameActivity extends AppCompatActivity implements ChainWordFragment
                                 if (!word.isRevealed && !word.guess(mGuess)) {
                                     word.revealLetter();
                                 }
+                                //Need to figure out how to update the recyclerView
+                                //mList.mRecyclerView.invalidate();
                                 dialog.cancel();
                             }
                         });
