@@ -52,13 +52,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderManager.Lo
     /** ID to identify READ_CONTACTS permission request. */
     private static final int REQUEST_READ_CONTACTS = 0;
 
-    /** A dummy authentication store containing known user names and passwords.
-     *  TODO: remove after connecting to a real authentication system.
-     */
-    private static final String[] DUMMY_CREDENTIALS = new String[]{
-            "mrsharff:matpass", "mbadgett:michaelpass"
-    };
-
     /** Keep track of the login task to ensure we can cancel it if requested. */
     private UserLoginTask mAuthTask = null;
 
@@ -101,6 +94,16 @@ public class LoginActivity extends AppCompatActivity implements LoaderManager.Lo
             @Override
             public void onClick(View view) {
                 attemptLogin(true);
+            }
+        });
+
+        TextView mRegisterText = (TextView) findViewById(R.id.link_signup);
+        final Context context = this;
+        mRegisterText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, RegisterActivity.class);
+                startActivity(intent);
             }
         });
 

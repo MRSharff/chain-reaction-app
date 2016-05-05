@@ -14,7 +14,7 @@
 
     <ProgressBar
         android:id="@+id/login_progress"
-        style="?android:attr/progressBarStyleSmall"
+        style="?android:attr/progressBarStyleLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
@@ -34,7 +34,6 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="0dp"
             android:focusable="true"
             android:focusableInTouchMode="true">
 
@@ -103,7 +102,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="24dp"
-                android:text="@string/login_register"
+                android:text="@string/login_register_text"
                 android:gravity="center"
                 android:textSize="16sp"/>
 
