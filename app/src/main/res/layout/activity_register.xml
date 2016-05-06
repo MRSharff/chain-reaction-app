@@ -13,7 +13,7 @@
     <!-- Login progress -->
 
     <ProgressBar
-        android:id="@+id/login_progress"
+        android:id="@+id/register_progress"
         style="?android:attr/progressBarStyleLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -72,7 +72,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/logintext_top_margin"
                 android:layout_marginBottom="@dimen/logintext_bottom_margin">
-                <EditText android:id="@+id/input_username"
+                <EditText android:id="@+id/register_input_username"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="text"
@@ -85,7 +85,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/logintext_top_margin">
-                <EditText android:id="@+id/input_password"
+                <EditText android:id="@+id/register_input_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPassword"

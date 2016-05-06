@@ -24,7 +24,6 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -33,7 +32,6 @@ import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLEncoder;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
@@ -59,7 +57,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderManager.Lo
     private EditText mUsernameView;
     private EditText mPasswordView;
     private View mProgressView;
-    private View mLoginFormVew;
+    private View mLoginFormView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,7 +105,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderManager.Lo
             }
         });
 
-        mLoginFormVew = findViewById(R.id.login_form);
+        mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
     }
 
@@ -192,12 +190,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderManager.Lo
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
             int shortAnimeTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
 
-            mLoginFormVew.setVisibility(show ? View.GONE : View.VISIBLE);
-            mLoginFormVew.animate().setDuration(shortAnimeTime).alpha(show ? 0 : 1)
+            mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
+            mLoginFormView.animate().setDuration(shortAnimeTime).alpha(show ? 0 : 1)
                     .setListener(new AnimatorListenerAdapter() {
                         @Override
                         public void onAnimationEnd(Animator animation) {
-                            mLoginFormVew.setVisibility(show ? View.GONE : View.VISIBLE);
+                            mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
                         }
                     });
 
@@ -213,7 +211,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderManager.Lo
             // The ViewPropertyAnimator APIs are not available, so simply show
             // and hide the relevant UI components.
             mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-            mLoginFormVew.setVisibility(show ? View.GONE : View.VISIBLE);
+            mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
         }
     }
 
