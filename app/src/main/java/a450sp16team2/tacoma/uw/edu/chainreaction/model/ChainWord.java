@@ -10,6 +10,7 @@ public class ChainWord implements Serializable{
     private char[] mDisplay;
     private int mLetterCount;
     private int mTotalLetters;
+    private int mScore;
     public boolean isRevealed;
 
     public ChainWord(String theWord) {
@@ -17,6 +18,7 @@ public class ChainWord implements Serializable{
         mTotalLetters = theWord.length();
         mDisplay = new char[mTotalLetters];
         mLetterCount = 0;
+        mScore = 1200;
         isRevealed = false;
     }
     public void revealLetter() {
@@ -24,7 +26,13 @@ public class ChainWord implements Serializable{
             mDisplay[mLetterCount] = mWord[mLetterCount];
             mLetterCount++;
             isRevealed = (mLetterCount == mTotalLetters);
+            if (!isRevealed) {
+                if (mScore > 200) mScore -= 200;
+            } else mScore = 0;
         }
+    }
+    public int getScore() {
+        return mScore;
     }
 
     public void makeRevealed() {

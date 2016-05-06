@@ -14,13 +14,23 @@
         android:layout_height="wrap_content"
         android:id="@+id/words_list"
         android:name="a450sp16team2.tacoma.uw.edu.chainreaction.ChainWordFragment"
-        android:layout_weight="2"/>
+        android:layout_weight="4"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="16dp"
+        android:layout_margin="8dp"
         android:text="Score"
-        android:textSize="36dp"
+        android:textSize="28dp"
         android:layout_weight="1"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:textSize="28dp"
+        android:layout_weight="1"
+        android:text="0"
+        android:textColor="@color/colorText"
+        android:id="@+id/score"
+        />
 
 </LinearLayout>

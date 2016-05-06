@@ -2,22 +2,28 @@ package a450sp16team2.tacoma.uw.edu.chainreaction;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.support.annotation.IdRes;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import a450sp16team2.tacoma.uw.edu.chainreaction.model.ChainWord;
 
-public class GameActivity extends AppCompatActivity implements ChainWordFragment.OnListFragmentInteractionListener{
+public class GameActivity extends AppCompatActivity implements ChainWordFragment.OnListFragmentInteractionListener {
 
     private String mGuess;
+    private TextView mScoreKeeper;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+        mScoreKeeper = (TextView) findViewById(R.id.score);
     }
 
     @Override
@@ -63,5 +69,29 @@ public class GameActivity extends AppCompatActivity implements ChainWordFragment
         // show it
         alertDialog.show();
 
+    }
+
+    public void updateScore(int mScore) {
+        mScoreKeeper.setText("" + mScore);
+    }
+
+    public void gameOver() {
+        AlertDialog gameOverMessage= new AlertDialog.Builder(this).create();
+        gameOverMessage.setTitle("Game Over");
+        gameOverMessage.setMessage("Congradulations!\n" +
+                "You scored " + mScoreKeeper.getText().toString() + " points!");
+        gameOverMessage.setButton(AlertDialog.BUTTON_NEUTRAL, "Back to Main Menu",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+        gameOverMessage.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                GameActivity.this.finish();
+            }
+        });
+        gameOverMessage.show();
     }
 }

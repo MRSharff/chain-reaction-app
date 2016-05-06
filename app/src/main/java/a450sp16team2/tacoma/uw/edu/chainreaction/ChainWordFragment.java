@@ -33,6 +33,7 @@ public class ChainWordFragment extends Fragment {
     private int mCurrentWord;
     private List<ChainWord> mWords;
     private OnListFragmentInteractionListener mListener;
+    public GameActivity mGameActivity;
     public RecyclerView mRecyclerView;
     public WordListGenerator mWordListGenerator;
 
@@ -43,15 +44,6 @@ public class ChainWordFragment extends Fragment {
     public ChainWordFragment() {
     }
 
-    // TODO: Customize parameter initialization
-    @SuppressWarnings("unused")
-    public static ChainWordFragment newInstance(int columnCount) {
-        ChainWordFragment fragment = new ChainWordFragment();
-        Bundle args = new Bundle();
-        args.putInt(ARG_COLUMN_COUNT, columnCount);
-        fragment.setArguments(args);
-        return fragment;
-    }
     private void setWords(List<String> theWords) {
         if (mWords == null) {
             mWords = new ArrayList<ChainWord>();
@@ -69,12 +61,13 @@ public class ChainWordFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mGameActivity = (GameActivity) getActivity();
         mCurrentWord = 0;
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
         }
         try {
-            mWordListGenerator = new WordListGenerator(7, getActivity().getAssets().open("chainreaction.txt"));
+            mWordListGenerator = new WordListGenerator(5, getActivity().getAssets().open("chainreaction.txt"));
             mWordListGenerator.buildChain();
             setWords(mWordListGenerator.getWordList());
         } catch (IOException e) {
@@ -96,7 +89,7 @@ public class ChainWordFragment extends Fragment {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
             mRecyclerView = recyclerView;
-            recyclerView.setAdapter(new MyChainWordRecyclerViewAdapter(mWords, mListener));
+            recyclerView.setAdapter(new MyChainWordRecyclerViewAdapter(mWords, mListener, this));
         }
         return view;
     }
