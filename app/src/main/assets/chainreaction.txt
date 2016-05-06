@@ -175,6 +175,7 @@ house democrat
 house republican
 house representative
 house fire
+house music
 fire sale
 fire wood
 fire fighter
@@ -185,6 +186,7 @@ fire extinguisher
 fire bomb
 fire blast
 fire alarm
+fire truck
 bomb squad
 squad up
 bomb specialist
