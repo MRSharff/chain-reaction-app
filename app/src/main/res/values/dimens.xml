@@ -12,5 +12,7 @@
     <dimen name="logintext_bottom_margin">8dp</dimen>
     <dimen name="text_margin">16dp</dimen>
 
+    <dimen name="register_logo_margin_bottom">20dp</dimen>
+
 
 </resources>
