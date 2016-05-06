@@ -5,14 +5,24 @@ import java.io.Serializable;
 /**
  * Created by Admin on 5/3/2016.
  */
-public class ChainWord implements Serializable{
-    private char[] mWord;
-    private char[] mDisplay;
-    private int mLetterCount;
-    private int mTotalLetters;
-    private int mScore;
-    public boolean isRevealed;
 
+/**
+ * Chain word stores game data for each individual word in the list.
+ * this class handles revealing letters, guessing for results and calculating score.
+ */
+public class ChainWord implements Serializable{
+    private char[] mWord;       //the word itself
+    private char[] mDisplay;    //the current characters of the word displayed
+    private int mLetterCount;   //count of how many letters have been revealed
+    private int mTotalLetters;  //total number of letters in the word
+    private int mScore;         //current score available for the given word
+    public boolean isRevealed;  //status whether the word is fully revealed
+
+    /**
+     * constructor for the word. score is defaulted to 1200 to handle the loss of
+     * points for the initial reveal
+     * @param theWord
+     */
     public ChainWord(String theWord) {
         mWord = theWord.toCharArray();
         mTotalLetters = theWord.length();
@@ -21,6 +31,12 @@ public class ChainWord implements Serializable{
         mScore = 1200;
         isRevealed = false;
     }
+
+    /**
+     * reveals a letter by putting it into the display array.
+     * if the word is not yet revealed fully the point value is decremented by 200.
+     * point value will stay no lower than 200 until an incorrect guess reveals the word.
+     */
     public void revealLetter() {
         if (!isRevealed) {
             mDisplay[mLetterCount] = mWord[mLetterCount];
@@ -31,15 +47,24 @@ public class ChainWord implements Serializable{
             } else mScore = 0;
         }
     }
+
     public int getScore() {
         return mScore;
     }
 
+    /**
+     * reveals a word
+     */
     public void makeRevealed() {
         while(!isRevealed) revealLetter();
-        isRevealed = true;
     }
 
+    /**
+     * checks a string guess to see if it matchs the stored word. returns a boolean as the result
+     * and sets fields appropriately
+     * @param theGuess
+     * @return
+     */
     public boolean guess(String theGuess) {
         boolean rtn = false;
         if (theGuess.equals(new String(mWord))) {
@@ -51,6 +76,10 @@ public class ChainWord implements Serializable{
         return rtn;
     }
 
+    /**
+     * gets the display string for the word
+     * @return
+     */
     public String getDisplay() {
         return new String(mDisplay);
     }

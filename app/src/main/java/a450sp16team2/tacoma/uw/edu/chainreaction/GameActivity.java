@@ -14,11 +14,19 @@ import android.widget.TextView;
 
 import a450sp16team2.tacoma.uw.edu.chainreaction.model.ChainWord;
 
+/**
+ * Game Activity is the main activity for a game.
+ * This has a textview holding the score and a fragment list holding words.
+ */
 public class GameActivity extends AppCompatActivity implements ChainWordFragment.OnListFragmentInteractionListener {
 
     private String mGuess;
     private TextView mScoreKeeper;
 
+    /**
+     * gets the TextView and stores it as an instance variable for updating purposes
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +34,14 @@ public class GameActivity extends AppCompatActivity implements ChainWordFragment
         mScoreKeeper = (TextView) findViewById(R.id.score);
     }
 
+    /**
+     *  This method creates an Alert Dialog which prompts the user for their guess
+     *  and checks it against the word they are guessing against. when a guess is incorrect,
+     *  reveal another letter then when the prompt is closed, it notifies the adapter to both
+     *  redraw its fragments and update some internal values.
+     * @param word The ChainWord reference that was clicked on
+     * @param myChainWordRecyclerViewAdapter Adapter that causes behavior with the fragment.
+     */
     @Override
     public void onListFragmentInteraction(final ChainWord word, final MyChainWordRecyclerViewAdapter myChainWordRecyclerViewAdapter) {
         // get prompts.xml view
@@ -51,6 +67,7 @@ public class GameActivity extends AppCompatActivity implements ChainWordFragment
                                 // edit text
                                 mGuess = userInput.getText().toString();
                                 dialog.dismiss();
+                                //guess the word and reveal a letter if wrong
                                 if (!word.guess(mGuess) && !word.isRevealed) {
                                     word.revealLetter();
                                 }
@@ -71,10 +88,18 @@ public class GameActivity extends AppCompatActivity implements ChainWordFragment
 
     }
 
+    /**
+     * sets the score keeping box TextView tothe most recently updated score.
+     * @param mScore
+     */
     public void updateScore(int mScore) {
         mScoreKeeper.setText("" + mScore);
     }
 
+    /**
+     * Creates a Dialog that tells the user what their final score was
+     * and when the dialogis closed, returns to the main menu.
+     */
     public void gameOver() {
         AlertDialog gameOverMessage= new AlertDialog.Builder(this).create();
         gameOverMessage.setTitle("Game Over");

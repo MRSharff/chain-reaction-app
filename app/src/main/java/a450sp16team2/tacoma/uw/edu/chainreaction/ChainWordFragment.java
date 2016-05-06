@@ -26,9 +26,7 @@ import java.util.List;
  */
 public class ChainWordFragment extends Fragment {
 
-    // TODO: Customize parameter argument name
     private static final String ARG_COLUMN_COUNT = "column-count";
-    // TODO: Customize parameters
     private int mColumnCount = 1;
     private int mCurrentWord;
     private List<ChainWord> mWords;
@@ -44,6 +42,13 @@ public class ChainWordFragment extends Fragment {
     public ChainWordFragment() {
     }
 
+    /**
+     * setWords accepts a list of strings representing the words of the game and creates
+     * a Chainword object for each one. Chainwords hold the game information for a single word
+     * in the game and are also used for the fragment list.
+     * @param theWords List of  words. the words should follow the standards for the game where adjacent
+     *                 words form a common english phrase.
+     */
     private void setWords(List<String> theWords) {
         if (mWords == null) {
             mWords = new ArrayList<ChainWord>();
@@ -58,6 +63,13 @@ public class ChainWordFragment extends Fragment {
             mWords.add(c);
         }
     }
+
+    /**
+     * onCreate Makes a wordListGenerator which generates the listof linked words for the game.
+     * this is the model for the game.
+     * saves the parent Game activity for reference and to pass to the Recycler View.
+     * @param savedInstanceState
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,7 +79,7 @@ public class ChainWordFragment extends Fragment {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
         }
         try {
-            mWordListGenerator = new WordListGenerator(5, getActivity().getAssets().open("chainreaction.txt"));
+            mWordListGenerator = new WordListGenerator(6, getActivity().getAssets().open("chainreaction.txt"));
             mWordListGenerator.buildChain();
             setWords(mWordListGenerator.getWordList());
         } catch (IOException e) {
@@ -75,6 +87,13 @@ public class ChainWordFragment extends Fragment {
         }
     }
 
+    /**
+     * Inflate the Chainword list and create the recyclerview adapter
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
