@@ -9,8 +9,11 @@
     <string name="prompt_retype_password">Retype Password</string>
 
     <string name="login">Login</string>
+    <string name="login_register_text">No account? <b><i>Register</i></b> or play offline.</string>
     <string name="play_offline">Play Offline</string>
-    <string name="login_register">No account? Register or play offline</string>
+    <string name="no_account_text">No account? </string>
+    <string name="register_text">Register</string>
+    <string name="play_offline_text"> or play offline</string>
 
     <string name="create_account">Create Account</string>
     <string name="register_login">Already have an account? Login</string>
@@ -39,7 +42,14 @@
 
     <!-- Strings related to difficulty settings -->
     <string name="difficulty">Difficulty</string>
+    <string name="mode">Mode</string>
     <string-array name="classic_difficulty">
+        <item>Easy</item>
+        <item>Medium</item>
+        <item>Hard</item>
+    </string-array>
+
+    <string-array name="game_modes">
         <item>Easy</item>
         <item>Medium</item>
         <item>Hard</item>
