@@ -1,9 +1,14 @@
 package a450sp16team2.tacoma.uw.edu.chainreaction;
 
+import android.content.Context;
+import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewParent;
 import android.widget.TextView;
 import a450sp16team2.tacoma.uw.edu.chainreaction.model.ChainWord;
 
@@ -13,13 +18,19 @@ public class MyChainWordRecyclerViewAdapter extends RecyclerView.Adapter<MyChain
 
     private final List<ChainWord> mValues;
     private final ChainWordFragment.OnListFragmentInteractionListener mListener;
+    private ChainWordFragment mChainWordFragment;
     private int mCurrentWord;
+    private int mScore;
 
-    public MyChainWordRecyclerViewAdapter(List<ChainWord> items, ChainWordFragment.OnListFragmentInteractionListener listener) {
+    public MyChainWordRecyclerViewAdapter(List<ChainWord> items, ChainWordFragment.OnListFragmentInteractionListener listener,
+                                          ChainWordFragment chainList) {
         mValues = items;
         mListener = listener;
         mCurrentWord = 0;
+        mScore = 0;
+        mChainWordFragment = chainList;
     }
+
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -29,9 +40,16 @@ public class MyChainWordRecyclerViewAdapter extends RecyclerView.Adapter<MyChain
     }
 
     public void update() {
+        boolean gameOver = true;
         if (mValues.get(mCurrentWord).isRevealed) {
             if (mValues.size() > mCurrentWord + 1)
                 mValues.get(mCurrentWord + 1).revealLetter();
+            mScore += mValues.get(mCurrentWord).getScore();
+            mChainWordFragment.mGameActivity.updateScore(mScore);
+            for (ChainWord c : mValues) {
+                gameOver = (gameOver && c.isRevealed);
+            }
+            if (gameOver) mChainWordFragment.mGameActivity.gameOver();
         }
     }
     @Override
