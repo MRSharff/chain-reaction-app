@@ -26,6 +26,9 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
+        //TODO: Update functionality on Online play to grey out button if no internet connection
+        //TODO: Or, have it pop up an alert dialog saying that we need an internet connection
+
 //        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 //        setSupportActionBar(toolbar);
 //

@@ -5,6 +5,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -58,55 +59,67 @@ public class LoginActivity extends AppCompatActivity implements LoaderManager.Lo
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
+    private SharedPreferences mSharedPreferences;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        // Set up the login form.
-        mUsernameView = (EditText) findViewById(R.id.input_username);
+        mSharedPreferences = getSharedPreferences(getString(R.string.LOGIN_PREFS)
+                , Context.MODE_PRIVATE);
+        if (!mSharedPreferences.getBoolean(getString(R.string.LOGGEDIN), false)) {
+            // Set up the login form.
+            mUsernameView = (EditText) findViewById(R.id.input_username);
 
-        mPasswordView = (EditText) findViewById(R.id.input_password);
-        mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
-                if (id == R.id.login || id == EditorInfo.IME_NULL) {
-                    attemptLogin(false);
-                    return true;
+            mPasswordView = (EditText) findViewById(R.id.input_password);
+            mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+                @Override
+                public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
+                    if (id == R.id.login || id == EditorInfo.IME_NULL) {
+                        attemptLogin(false);
+                        return true;
+                    }
+                    return false;
                 }
-                return false;
-            }
-        });
+            });
 
-        Button mLoginButton = (Button) findViewById(R.id.btn_login);
-        mLoginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                attemptLogin(false);
-            }
-        });
+            Button mLoginButton = (Button) findViewById(R.id.btn_login);
+            mLoginButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    attemptLogin(false);
+                }
+            });
 
-        Button mPlayOfflineButton = (Button) findViewById(R.id.btn_play_offline);
-        mPlayOfflineButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                attemptLogin(true);
-            }
-        });
+            Button mPlayOfflineButton = (Button) findViewById(R.id.btn_play_offline);
+            mPlayOfflineButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    attemptLogin(true);
+                }
+            });
 
-        TextView mRegisterText = (TextView) findViewById(R.id.link_signup);
-        final Context context = this;
-        mRegisterText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, RegisterActivity.class);
-                startActivity(intent);
-            }
-        });
+            TextView mRegisterText = (TextView) findViewById(R.id.link_signup);
+            final Context context = this;
+            mRegisterText.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context, RegisterActivity.class);
+                    startActivity(intent);
+                }
+            });
 
-        mLoginFormView = findViewById(R.id.login_form);
-        mProgressView = findViewById(R.id.login_progress);
+            mLoginFormView = findViewById(R.id.login_form);
+            mProgressView = findViewById(R.id.login_progress);
+        } else {
+            Intent intent = new Intent(this, HomeActivity.class);
+            startActivity(intent);
+            finish();
+        }
+
+
     }
 
 
@@ -121,7 +134,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderManager.Lo
             return;
         }
 
-        if (isOffline) {
+        if (isOffline ) {
             showProgress(true);
             mAuthTask = new UserLoginTask(OFFLINE_USERNAME, OFFLINE_PASSWORD, this);
             mAuthTask.execute((Void) null);
@@ -140,7 +153,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderManager.Lo
 
             // check for a valid password, if the user entered one.
             if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
-                mPasswordView.setError(getString(R.string.error_invalid_username));
+                mPasswordView.setError(getString(R.string.error_invalid_password));
                 focusView = mPasswordView;
                 cancel = true;
             }
@@ -282,7 +295,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderManager.Lo
 
         @Override
         protected Boolean doInBackground(Void... params) {
-            // TODO: attempt authentication against a network service.
             String shaPassword = getSHA256(mPassword);
             Log.i(LOG_TAG, "SHA: " + shaPassword);
             String response = "";
@@ -316,6 +328,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderManager.Lo
             showProgress(false);
 
             if (success) {
+                //Only set the shared prefs to "logged in" if we actually successfully log in
+                mSharedPreferences.edit().putBoolean(getString(R.string.LOGGEDIN), true).apply();
+                mSharedPreferences.edit().putString(getString(R.string.LOGGEDIN_USERNAME), mUsername);
                 Intent intent = new Intent(mContext, HomeActivity.class);
                 startActivity(intent);
                 finish();

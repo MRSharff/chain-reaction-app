@@ -55,5 +55,10 @@
         <item>Hard</item>
     </string-array>
 
+    <!-- Login Shared Prefs -->
+    <string name="LOGIN_PREFS">a450sp16team2.tacoma.uw.edu.chainreaction.PREFS</string>
+    <string name="LOGGEDIN">loggedin</string>
+    <string name="LOGGEDIN_USERNAME">login_username</string>
+    <string name="LOGGEDIN_PASSWORD">login_password</string>
 
 </resources>
