@@ -1,8 +1,10 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat">
         <!-- Customize your theme here. -->
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
@@ -16,5 +18,55 @@
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="AppTheme.Deadpool" parent="AppTheme">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/deadpool_colorPrimary</item>
+        <!--<item name="colorPrimaryLight">@color/deadpool_colorPrimaryLight</item>-->
+        <item name="colorPrimaryDark">@color/deadpool_colorPrimaryDark</item>
+        <item name="colorAccent">@color/deadpool_colorAccent</item>
+        <!--<item name="colorAccentFallback">@color/deadpool_colorAccentFallback</item>-->
+        <item name="colorControlHighlight">@color/deadpool_colorAccent</item>
+        <item name="colorButtonNormal">@color/deadpool_colorPrimaryDark</item>
+        <item name="background">@color/deadpool_colorPrimary</item>
+    </style>
+
+    <style name="AppTheme.Thing" parent="AppTheme">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/thing_colorPrimary</item>
+        <!--<item name="colorPrimaryLight">@color/thing_colorPrimaryLight</item>-->
+        <item name="colorPrimaryDark">@color/thing_colorPrimaryDark</item>
+        <item name="colorAccent">@color/thing_colorAccent</item>
+        <!--<item name="colorAccentFallback">@color/thing_colorAccentFallback</item>-->
+        <item name="colorControlHighlight">@color/thing_colorAccent</item>
+        <item name="colorButtonNormal">@color/thing_colorPrimaryDark</item>
+        <item name="background">@color/thing_colorPrimary</item>
+    </style>
+
+    <style name="AppTheme.Joker" parent="AppTheme">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/joker_colorPrimary</item>
+        <!--<item name="colorPrimaryLight">@color/joker_colorPrimaryLight</item>-->
+        <item name="colorPrimaryDark">@color/joker_colorPrimaryDark</item>
+        <item name="colorAccent">@color/joker_colorAccent</item>
+        <!--<item name="colorAccentFallback">@color/joker_colorAccentFallback</item>-->
+        <item name="colorControlHighlight">@color/joker_colorAccent</item>
+        <item name="colorButtonNormal">@color/joker_colorPrimaryDark</item>
+        <item name="background">@color/joker_colorPrimary</item>
+    </style>
+
+    <style name="AppTheme.Inception" parent="AppTheme">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/inception_colorPrimary</item>
+        <!--<item name="colorPrimaryLight">@color/inception_colorPrimaryLight</item>-->
+        <item name="colorPrimaryDark">@color/inception_colorPrimaryDark</item>
+        <item name="colorAccent">@color/inception_colorAccent</item>
+        <!--<item name="colorAccentFallback">@color/inception_colorAccentFallback</item>-->
+        <item name="colorControlHighlight">@color/inception_colorAccent</item>
+        <item name="colorButtonNormal">@color/inception_colorPrimaryDark</item>
+        <item name="background">@color/inception_colorPrimary</item>
+    </style>
+    
+    <!--<style name=""-->
 
 </resources>

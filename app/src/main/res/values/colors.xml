@@ -1,12 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#009688</color>
+    <color name="colorLightPrimary">#B2DFDB</color>
     <color name="colorPrimaryDark">#00796B</color>
     <color name="colorAccent">#FF5252</color>
-    <color name="colorLightPrimary">#B2DFDB</color>
     <color name="textColorPrimary">#212121</color>
     <color name="textColorSecondary">#727272</color>
     <color name="colorDivider">#B6B6B6</color>
     <color name="colorText">#FFFFFF</color>
+
+    <color name="deadpool_colorPrimary">#E43F3F</color>
+    <color name="deadpool_colorPrimaryLight">#F6C5C5</color>
+    <color name="deadpool_colorPrimaryDark">#E12929</color>
+    <color name="deadpool_colorAccent">#616161</color>
+    <color name="deadpool_textColorPrimary">#212121</color>
+    <color name="deadpool_textColorSecondary">#727272</color>
+    <color name="deadpool_colorDivider">#B6B6B6</color>
+    <color name="deadpool_colorText">#FFFFFF</color>
+
+    <color name="thing_colorPrimary">#FFA726</color>
+    <color name="thing_colorPrimaryLight">#FFF3E0</color>
+    <color name="thing_colorPrimaryDark">#FB8C00</color>
+    <color name="thing_colorAccent">#40C4FF</color>
+    <color name="thing_colorAccentFallback">#80D8FF</color>
+    <color name="thing_textColorPrimary">#212121</color>
+    <color name="thing_textColorSecondary">#727272</color>
+    <color name="thing_colorDivider">#B6B6B6</color>
+    <color name="thing_colorText">#FFFFFF</color>
+
+    <color name="joker_colorPrimary">#6A1B9A</color>
+    <color name="joker_colorPrimaryLight">#AB47BC</color>
+    <color name="joker_colorPrimaryDark">#4A148C</color>
+    <color name="joker_colorAccent">#00C853</color>
+    <color name="joker_colorAccentFallback">#00E676</color>
+    <color name="joker_textColorPrimary">#212121</color>
+    <color name="joker_textColorSecondary">#727272</color>
+    <color name="joker_colorDivider">#B6B6B6</color>
+    <color name="joker_colorText">#FFFFFF</color>
+
+    <color name="inception_colorPrimary">#BCAAA4</color>
+    <color name="inception_colorPrimaryLight">#EFEBE9</color>
+    <color name="inception_colorPrimaryDark">#8D6E63</color>
+    <color name="inception_colorAccent">#40C4FF</color>
+    <color name="inception_colorAccentFallback">#80D8FF</color>
+    <color name="inception_textColorPrimary">#212121</color>
+    <color name="inception_textColorSecondary">#727272</color>
+    <color name="inception_colorDivider">#B6B6B6</color>
+    <color name="inception_colorText">#FFFFFF</color>
 
 </resources>

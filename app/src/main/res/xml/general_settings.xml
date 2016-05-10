@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+        android:title="@string/pref_ui_title"
+        android:key="pref_key_ui">
+        <ListPreference
+            android:key="button_theme_key"
+            android:title="@string/pref_title_theme"
+            android:entries="@array/array_theme_names"
+            android:entryValues="@array/array_theme_values"
+            android:defaultValue="AppTheme"
+            />
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:title="@string/pref_account_title"
+        android:key="pref_key_ui">
+        <Preference
+            android:key="pref_key_delete_account"
+            android:summary="@string/pref_summary_delete_account"
+            android:title="@string/pref_title_delete_account" />
+        <Preference
+            android:key="pref_key_logout"
+            android:title="@string/pref_title_logout" />
+    </PreferenceCategory>
+
+
+</PreferenceScreen>

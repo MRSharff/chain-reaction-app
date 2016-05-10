@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="array_theme_names">
+        <item>Default</item>
+        <item>Deadpool</item>
+        <item>Thing</item>
+        <item>Joker</item>
+        <item>Inception</item>
+    </string-array>
+    <string-array name="array_theme_values">
+        <item>AppTheme</item>
+        <item>AppTheme.Deadpool</item>
+        <item>AppTheme.Thing</item>
+        <item>AppTheme.Joker</item>
+        <item>AppTheme.Inception</item>
+    </string-array>
+</resources>
