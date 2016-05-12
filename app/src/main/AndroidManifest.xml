@@ -27,7 +27,7 @@
         <activity
             android:name=".GameActivity"
             android:label="GameActivity"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme"/>
         <activity
             android:name=".HomeActivity"
             android:label="@string/title_activity_home"
@@ -42,7 +42,10 @@
         </activity>
         <!-- <activity android:name=".GameSettingsActivity" /> -->
         <activity android:name=".authenticate.RegisterActivity" />
-        <activity android:name=".SettingsActivity"></activity>
+        <activity
+            android:label="@string/Settings"
+            android:name=".SettingsActivity"
+            android:theme="@style/AppTheme"/>
     </application>
 
 </manifest>

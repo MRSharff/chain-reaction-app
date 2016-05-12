@@ -9,9 +9,13 @@
     </string-array>
     <string-array name="array_theme_values">
         <item>AppTheme</item>
-        <item>AppTheme.Deadpool</item>
-        <item>AppTheme.Thing</item>
-        <item>AppTheme.Joker</item>
-        <item>AppTheme.Inception</item>
+        <item>Deadpool</item>
+        <item>Thing</item>
+        <item>Joker</item>
+        <item>Inception</item>
     </string-array>
+
+    <integer-array name="arrayvalues">
+        <item>@style/AppTheme.Deadpool</item>
+    </integer-array>
 </resources>

@@ -4,7 +4,7 @@
         android:title="@string/pref_ui_title"
         android:key="pref_key_ui">
         <ListPreference
-            android:key="button_theme_key"
+            android:key="pref_theme_key"
             android:title="@string/pref_title_theme"
             android:entries="@array/array_theme_names"
             android:entryValues="@array/array_theme_values"

@@ -10,6 +10,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.preference.PreferenceManager;
 import android.provider.ContactsContract;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
@@ -64,6 +65,21 @@ public class LoginActivity extends AppCompatActivity implements LoaderManager.Lo
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+//
+//        String theme = PreferenceManager.getDefaultSharedPreferences(this)
+//                .getString("pref_theme_key", "AppTheme");
+//        if (theme.equals("AppTheme")) {
+//            setTheme(R.style.AppTheme);
+//        } else if (theme.equals("Deadpool")) {
+//            setTheme(R.style.AppTheme_Deadpool);
+//        } else if (theme.equals("Thing")) {
+//            setTheme(R.style.AppTheme_Thing);
+//        } else if (theme.equals("Joker")) {
+//            setTheme(R.style.AppTheme_Joker);
+//        } else if (theme.equals("Inception")) {
+//            setTheme(R.style.AppTheme_Inception);
+//        }
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
