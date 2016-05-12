@@ -27,10 +27,10 @@ public class GameSettingsActivity extends AppCompatActivity {
                 R.array.game_modes,
                 android.R.layout.simple_spinner_item);
 
-        try {
+        if (modeSpinner != null && difficultySpinner != null) {
             modeSpinner.setAdapter(modeSpinnerAdapter);
             difficultySpinner.setAdapter(diffSpinnerAdapter);
-        } catch (NullPointerException e) {
+        } else {
             Log.e(LOG_TAG, "A Spinner was null");
         }
     }
