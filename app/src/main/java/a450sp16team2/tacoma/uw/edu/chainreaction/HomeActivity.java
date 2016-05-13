@@ -15,8 +15,13 @@ import java.util.Set;
 
 public class HomeActivity extends AppCompatActivity {
 
+    public static HomeActivity homeActivity;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        homeActivity = this;
+
 
         String theme = PreferenceManager.getDefaultSharedPreferences(this)
                 .getString("pref_theme_key", "AppTheme");

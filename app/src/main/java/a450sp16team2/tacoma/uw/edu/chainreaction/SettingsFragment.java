@@ -46,13 +46,20 @@ public class SettingsFragment extends PreferenceFragment {
     }
 
     private void logout() {
+
+        // Set logged out key.
         SharedPreferences sharedPreferences =
                 getActivity().getSharedPreferences(getString(R.string.LOGIN_PREFS), Context.MODE_PRIVATE);
         sharedPreferences.edit().putBoolean(getString(R.string.LOGGEDIN), false)
-                .commit();
+                .apply(); // can also be .commit()
 
         Intent i = new Intent(getActivity(), LoginActivity.class);
         startActivity(i);
+
+        //finish the home activity so we can't go "Back" to it after logging out
+        HomeActivity.homeActivity.finish();
+
+        // Finish this activity so we can't go back to it after logging out.
         getActivity().finish();
     }
 
