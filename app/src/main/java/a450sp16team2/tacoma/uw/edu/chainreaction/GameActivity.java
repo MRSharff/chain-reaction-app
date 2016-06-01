@@ -2,6 +2,7 @@ package a450sp16team2.tacoma.uw.edu.chainreaction;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.preference.PreferenceManager;
 import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
@@ -29,6 +30,21 @@ public class GameActivity extends AppCompatActivity implements ChainWordFragment
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        String theme = PreferenceManager.getDefaultSharedPreferences(this)
+                .getString("pref_theme_key", "AppTheme");
+        if (theme.equals("AppTheme")) {
+            setTheme(R.style.AppTheme);
+        } else if (theme.equals("Deadpool")) {
+            setTheme(R.style.AppTheme_Deadpool);
+        } else if (theme.equals("Thing")) {
+            setTheme(R.style.AppTheme_Thing);
+        } else if (theme.equals("Joker")) {
+            setTheme(R.style.AppTheme_Joker);
+        } else if (theme.equals("Inception")) {
+            setTheme(R.style.AppTheme_Inception);
+        }
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
         mScoreKeeper = (TextView) findViewById(R.id.score);

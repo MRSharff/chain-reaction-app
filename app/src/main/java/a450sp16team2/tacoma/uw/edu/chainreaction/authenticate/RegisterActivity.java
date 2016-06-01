@@ -9,6 +9,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.preference.PreferenceManager;
 import android.provider.ContactsContract;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
@@ -22,6 +23,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -53,6 +55,27 @@ public class RegisterActivity extends AppCompatActivity  implements LoaderManage
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        String theme = PreferenceManager.getDefaultSharedPreferences(this)
+                .getString("pref_theme_key", "AppTheme");
+        switch (theme) {
+            case "AppTheme":
+                setTheme(R.style.AppTheme);
+                break;
+            case "Deadpool":
+                setTheme(R.style.AppTheme_Deadpool);
+                break;
+            case "Thing":
+                setTheme(R.style.AppTheme_Thing);
+                break;
+            case "Joker":
+                setTheme(R.style.AppTheme_Joker);
+                break;
+            case "Inception":
+                setTheme(R.style.AppTheme_Inception);
+                break;
+        }
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
@@ -61,14 +84,29 @@ public class RegisterActivity extends AppCompatActivity  implements LoaderManage
         mPasswordView = (EditText) findViewById(R.id.register_input_password);
         mRetypeView = (EditText) findViewById(R.id.input_confirm_password);
 
+
         AppCompatButton mCreateAccountButton = (AppCompatButton) findViewById(R.id.btn_create_account);
-        mCreateAccountButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                attemptRegister();
-                Log.d(LOG_TAG, "Create Account Clicked");
-            }
-        });
+        TextView mLoginText = (TextView) findViewById(R.id.link_login);
+        final Context context = this;
+
+        if (mCreateAccountButton != null && mLoginText != null) {
+            mCreateAccountButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    attemptRegister();
+                    Log.d(LOG_TAG, "Create Account Clicked");
+                }
+            });
+            mLoginText.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context, LoginActivity.class);
+                    startActivity(intent);
+                }
+            });
+        } else {
+            Log.e(LOG_TAG, "A UI element was null");
+        }
 
         mRegisterFormView = findViewById(R.id.register_form);
         mProgressView = findViewById(R.id.register_progress);
@@ -287,22 +325,17 @@ public class RegisterActivity extends AppCompatActivity  implements LoaderManage
         private String getSHA256(String password) {
             MessageDigest mdSHA256 = null;
             String shaHash = null;
+            byte[] data;
+
             try {
                 mdSHA256 = MessageDigest.getInstance("SHA-256");
+                mdSHA256.update(password.getBytes("ASCII"));
+                data = mdSHA256.digest();
+                shaHash = convertToHex(data);
             } catch (NoSuchAlgorithmException e1) {
                 Log.e(LOG_TAG, "Error initializing SHA256 message digest");
-            }
-            try {
-                mdSHA256.update(password.getBytes("ASCII"));
-            } catch (UnsupportedEncodingException e2) {
+            } catch (IOException e2) {
                 e2.printStackTrace();
-            }
-
-            byte[] data = mdSHA256.digest();
-            try {
-                shaHash = convertToHex(data);
-            } catch (IOException e3) {
-                e3.printStackTrace();
             }
 
             return shaHash;
@@ -319,11 +352,11 @@ public class RegisterActivity extends AppCompatActivity  implements LoaderManage
                 sb.append("&pwd=");
                 sb.append(password);
 
-                Log.i(LOG_TAG, "AddURL " + sb.toString());
+//                Log.i(LOG_TAG, "AddURL " + sb.toString());
 
             }
             catch(Exception e) {
-                Log.e(LOG_TAG, "Something wrong with the url" + e.getMessage());
+                Log.e(LOG_TAG, "Something wrong with the stringbuilder" + e.getMessage());
             }
             return sb.toString();
         }

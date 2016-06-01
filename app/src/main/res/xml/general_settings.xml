@@ -8,7 +8,7 @@
             android:title="@string/pref_title_theme"
             android:entries="@array/array_theme_names"
             android:entryValues="@array/array_theme_values"
-            android:defaultValue="AppTheme"
+            android:defaultValue="@style/AppTheme"
             />
     </PreferenceCategory>
     <PreferenceCategory

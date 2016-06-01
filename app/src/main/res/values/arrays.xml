@@ -14,8 +14,12 @@
         <item>Joker</item>
         <item>Inception</item>
     </string-array>
+    <!--<string-array name="array_theme_values">-->
+        <!--<item>@style/AppTheme</item>-->
+        <!--<item>@style/AppTheme.Deadpool</item>-->
+        <!--<item>@style/AppTheme.Thing</item>-->
+        <!--<item>@style/AppTheme.Joker</item>-->
+        <!--<item>@style/AppTheme.Inception</item>-->
+    <!--</string-array>-->
 
-    <integer-array name="arrayvalues">
-        <item>@style/AppTheme.Deadpool</item>
-    </integer-array>
 </resources>

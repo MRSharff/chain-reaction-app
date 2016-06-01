@@ -65,20 +65,26 @@ public class LoginActivity extends AppCompatActivity implements LoaderManager.Lo
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-//
-//        String theme = PreferenceManager.getDefaultSharedPreferences(this)
-//                .getString("pref_theme_key", "AppTheme");
-//        if (theme.equals("AppTheme")) {
-//            setTheme(R.style.AppTheme);
-//        } else if (theme.equals("Deadpool")) {
-//            setTheme(R.style.AppTheme_Deadpool);
-//        } else if (theme.equals("Thing")) {
-//            setTheme(R.style.AppTheme_Thing);
-//        } else if (theme.equals("Joker")) {
-//            setTheme(R.style.AppTheme_Joker);
-//        } else if (theme.equals("Inception")) {
-//            setTheme(R.style.AppTheme_Inception);
-//        }
+
+        String theme = PreferenceManager.getDefaultSharedPreferences(this)
+                .getString("pref_theme_key", "AppTheme");
+        switch (theme) {
+            case "AppTheme":
+                setTheme(R.style.AppTheme);
+                break;
+            case "Deadpool":
+                setTheme(R.style.AppTheme_Deadpool);
+                break;
+            case "Thing":
+                setTheme(R.style.AppTheme_Thing);
+                break;
+            case "Joker":
+                setTheme(R.style.AppTheme_Joker);
+                break;
+            case "Inception":
+                setTheme(R.style.AppTheme_Inception);
+                break;
+        }
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
@@ -105,30 +111,34 @@ public class LoginActivity extends AppCompatActivity implements LoaderManager.Lo
             });
 
             Button mLoginButton = (Button) findViewById(R.id.btn_login);
-            mLoginButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    attemptLogin(false);
-                }
-            });
-
             Button mPlayOfflineButton = (Button) findViewById(R.id.btn_play_offline);
-            mPlayOfflineButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    attemptLogin(true);
-                }
-            });
-
             TextView mRegisterText = (TextView) findViewById(R.id.link_signup);
             final Context context = this;
-            mRegisterText.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(context, RegisterActivity.class);
-                    startActivity(intent);
-                }
-            });
+
+            // Null checks
+            if (mLoginButton != null && mPlayOfflineButton != null && mRegisterText != null) {
+                mLoginButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        attemptLogin(false);
+                    }
+                });
+                mPlayOfflineButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        attemptLogin(true);
+                    }
+                });
+                mRegisterText.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(context, RegisterActivity.class);
+                        startActivity(intent);
+                    }
+                });
+            } else {
+                Log.e(LOG_TAG, "A UI element was null");
+            }
 
             mLoginFormView = findViewById(R.id.login_form);
             mProgressView = findViewById(R.id.login_progress);
@@ -366,25 +376,37 @@ public class LoginActivity extends AppCompatActivity implements LoaderManager.Lo
         }
 
         private String getSHA256(String password) {
-            MessageDigest mdSHA256 = null;
+            MessageDigest mdSHA256;
             String shaHash = null;
+
             try {
                 mdSHA256 = MessageDigest.getInstance("SHA-256");
+                mdSHA256.update(password.getBytes("ASCII"));
+                byte[] data = mdSHA256.digest();
+                shaHash = convertToHex(data);
             } catch (NoSuchAlgorithmException e1) {
                 Log.e(LOG_TAG, "Error initializing SHA256 message digest");
-            }
-            try {
-                mdSHA256.update(password.getBytes("ASCII"));
-            } catch (UnsupportedEncodingException e2) {
+            } catch (IOException e2) {
                 e2.printStackTrace();
             }
 
-            byte[] data = mdSHA256.digest();
-            try {
-                shaHash = convertToHex(data);
-            } catch (IOException e3) {
-                e3.printStackTrace();
-            }
+//            try {
+//                mdSHA256 = MessageDigest.getInstance("SHA-256");
+//            } catch (NoSuchAlgorithmException e1) {
+//                Log.e(LOG_TAG, "Error initializing SHA256 message digest");
+//            }
+//            try {
+//                mdSHA256.update(password.getBytes("ASCII"));
+//            } catch (UnsupportedEncodingException e2) {
+//                e2.printStackTrace();
+//            }
+//
+//            byte[] data = mdSHA256.digest();
+//            try {
+//                shaHash = convertToHex(data);
+//            } catch (IOException e3) {
+//                e3.printStackTrace();
+//            }
 
             return shaHash;
         }

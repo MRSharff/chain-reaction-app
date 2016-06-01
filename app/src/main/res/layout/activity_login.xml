@@ -54,12 +54,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/logintext_top_margin"
-                android:layout_marginBottom="@dimen/logintext_bottom_margin">
-                <EditText android:id="@+id/input_username"
+                android:layout_marginBottom="@dimen/logintext_bottom_margin"
+                android:hint="@string/prompt_username">
+                <android.support.design.widget.TextInputEditText android:id="@+id/input_username"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="text"
-                    android:hint="@string/prompt_username"
                     android:maxLines="1"
                     android:maxLength="@integer/max_username_length"/>
             </android.support.design.widget.TextInputLayout>
@@ -68,15 +68,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/logintext_top_margin"
-                android:layout_marginBottom="@dimen/logintext_bottom_margin">
-                <EditText android:id="@+id/input_password"
+                android:layout_marginBottom="@dimen/logintext_bottom_margin"
+                android:hint="@string/prompt_password">
+                <android.support.design.widget.TextInputEditText android:id="@+id/input_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPassword"
                     android:imeActionId="@+id/login"
                     android:imeActionLabel="@string/action_sign_in_short"
                     android:imeOptions="actionUnspecified"
-                    android:hint="@string/prompt_password"
                     android:maxLines="1"
                     android:maxLength="@integer/max_password_length"/>
             </android.support.design.widget.TextInputLayout>
