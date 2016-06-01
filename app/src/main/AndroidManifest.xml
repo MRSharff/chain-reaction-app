@@ -27,7 +27,7 @@
         <activity
             android:name=".GameActivity"
             android:label="GameActivity"
-            android:theme="@style/AppTheme"/>
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".HomeActivity"
             android:label="@string/title_activity_home"
@@ -43,9 +43,17 @@
         <!-- <activity android:name=".GameSettingsActivity" /> -->
         <activity android:name=".authenticate.RegisterActivity" />
         <activity
-            android:label="@string/Settings"
             android:name=".SettingsActivity"
-            android:theme="@style/AppTheme"/>
+            android:label="@string/Settings"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".HighscoreActivity"
+            android:label="@string/title_activity_highscore"
+            android:parentActivityName=".HomeActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="a450sp16team2.tacoma.uw.edu.chainreaction.HomeActivity" />
+        </activity>
     </application>
 
 </manifest>

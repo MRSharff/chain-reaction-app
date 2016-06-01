@@ -20,7 +20,7 @@ public class ChainWord implements Serializable{
 
     /**
      * constructor for the word. score is defaulted to 1200 to handle the loss of
-     * points for the initial reveal
+     * points for the initial reveal.
      * @param theWord
      */
     public ChainWord(String theWord) {
@@ -61,7 +61,7 @@ public class ChainWord implements Serializable{
 
     /**
      * checks a string guess to see if it matchs the stored word. returns a boolean as the result
-     * and sets fields appropriately
+     * and sets fields appropriately.
      * @param theGuess
      * @return
      */
@@ -77,8 +77,16 @@ public class ChainWord implements Serializable{
     }
 
     /**
-     * gets the display string for the word
-     * @return
+     * gets the string representation of this chainword.
+     * @return the word
+     */
+    public String getWord() {
+        return new String(mWord);
+    }
+
+    /**
+     * gets the display string for the word.
+     * @return the letters currently displayed
      */
     public String getDisplay() {
         return new String(mDisplay);

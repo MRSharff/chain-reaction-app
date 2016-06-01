@@ -2,12 +2,16 @@ package a450sp16team2.tacoma.uw.edu.chainreaction;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.res.Resources;
 import android.preference.PreferenceManager;
 import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -21,6 +25,8 @@ import a450sp16team2.tacoma.uw.edu.chainreaction.model.ChainWord;
  */
 public class GameActivity extends AppCompatActivity implements ChainWordFragment.OnListFragmentInteractionListener {
 
+    private static final String LOG_TAG = GameActivity.class.getSimpleName();
+
     private String mGuess;
     private TextView mScoreKeeper;
 
@@ -31,23 +37,28 @@ public class GameActivity extends AppCompatActivity implements ChainWordFragment
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        String theme = PreferenceManager.getDefaultSharedPreferences(this)
-                .getString("pref_theme_key", "AppTheme");
-        if (theme.equals("AppTheme")) {
-            setTheme(R.style.AppTheme);
-        } else if (theme.equals("Deadpool")) {
-            setTheme(R.style.AppTheme_Deadpool);
-        } else if (theme.equals("Thing")) {
-            setTheme(R.style.AppTheme_Thing);
-        } else if (theme.equals("Joker")) {
-            setTheme(R.style.AppTheme_Joker);
-        } else if (theme.equals("Inception")) {
-            setTheme(R.style.AppTheme_Inception);
-        }
+        HomeActivity.chainReactionSetTheme(this);
+
+//        String theme = PreferenceManager.getDefaultSharedPreferences(this)
+//                .getString("pref_theme_key", "AppTheme");
+//        if (theme.equals("AppTheme")) {
+//            setTheme(R.style.AppTheme);
+//        } else if (theme.equals("Deadpool")) {
+//            setTheme(R.style.AppTheme_Deadpool);
+//        } else if (theme.equals("Thing")) {
+//            setTheme(R.style.AppTheme_Thing);
+//        } else if (theme.equals("Joker")) {
+//            setTheme(R.style.AppTheme_Joker);
+//        } else if (theme.equals("Inception")) {
+//            setTheme(R.style.AppTheme_Inception);
+//        }
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
         mScoreKeeper = (TextView) findViewById(R.id.score);
+
+        //set initial score to 0
+        updateScore(0);
     }
 
     /**
@@ -65,44 +76,73 @@ public class GameActivity extends AppCompatActivity implements ChainWordFragment
                 (Context.LAYOUT_INFLATER_SERVICE);
         View promptsView = li.inflate(R.layout.prompt, null);
 
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        // Get the current theme key
+        String theme = PreferenceManager.getDefaultSharedPreferences(this)
+                .getString("pref_theme_key", "AppTheme");
+
+        AlertDialog.Builder alertDialogBuilder = null;
+
+        // set theme dependent upon selected theme key
+        switch (theme) {
+            case "AppTheme":
+                alertDialogBuilder = new AlertDialog.Builder(this, R.style.AppTheme_AlertDialog);
+                break;
+            case "Deadpool":
+                alertDialogBuilder = new AlertDialog.Builder(this, R.style.AppTheme_Deadpool_AlertDialog);
+                break;
+            case "Thing":
+                alertDialogBuilder = new AlertDialog.Builder(this, R.style.AppTheme_Thing_AlertDialog);
+                break;
+            case "Joker":
+                alertDialogBuilder = new AlertDialog.Builder(this, R.style.AppTheme_Joker_AlertDialog);
+                break;
+            case "Inception":
+                alertDialogBuilder = new AlertDialog.Builder(this, R.style.AppTheme_Inception_AlertDialog);
+                break;
+        }
+//
+//        alertDialogBuilder = new AlertDialog.Builder(this);
 
         // set prompts.xml to alertdialog builder
-        alertDialogBuilder.setView(promptsView);
+        if (alertDialogBuilder != null) {
+            alertDialogBuilder.setView(promptsView);
+            final EditText userInput = (EditText) promptsView
+                    .findViewById(R.id.input);
 
-        final EditText userInput = (EditText) promptsView
-                .findViewById(R.id.input);
+            // setup dialog
 
-        // set dialog message
-        alertDialogBuilder.setTitle(word.toString());
+            //Set title to show hint so far
+            String previousWord = myChainWordRecyclerViewAdapter.getPreviousWord();
+            alertDialogBuilder.setTitle(getString(R.string.word_hint_dialog)
+                    + previousWord + " " + myChainWordRecyclerViewAdapter.getHintAndBlank());
 
-        alertDialogBuilder
-                .setPositiveButton("OK",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog,int id) {
-                                // get user input and set it to result
-                                // edit text
-                                mGuess = userInput.getText().toString();
-                                dialog.dismiss();
-                                //guess the word and reveal a letter if wrong
-                                if (!word.guess(mGuess) && !word.isRevealed) {
-                                    word.revealLetter();
+            alertDialogBuilder
+                    .setPositiveButton(getString(R.string.guess_dialog_guess),
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog,int id) {
+                                    // get user input and set it to result
+                                    // edit text
+                                    mGuess = userInput.getText().toString();
+                                    dialog.dismiss();
+                                    //guess the word and reveal a letter if wrong
+                                    if (!word.guess(mGuess) && !word.isRevealed) {
+                                        word.revealLetter();
+                                        myChainWordRecyclerViewAdapter.updateScoreForMiss();
+                                    }
+                                    myChainWordRecyclerViewAdapter.notifyDataSetChanged();
+                                    myChainWordRecyclerViewAdapter.update();
                                 }
-                                myChainWordRecyclerViewAdapter.notifyDataSetChanged();
-                                myChainWordRecyclerViewAdapter.update();
-                            }
-                        });
+                            });
 
-        // Allow the user to cancel a guess so they can look at the word again
-        alertDialogBuilder
-                .setCancelable(true)
-                .setNegativeButton(R.string.cancel,
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog,int id) {
-                                dialog.cancel();
-                            }
-                        });
-
+            // Allow the user to cancel a guess so they can look at the word again
+            alertDialogBuilder
+                    .setCancelable(true)
+                    .setNegativeButton(R.string.cancel,
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog,int id) {
+                                    dialog.cancel();
+                                }
+                            });
 
 //        alertDialogBuilder.setOnDismissListener(new DialogInterface.OnDismissListener() {
 //            @Override
@@ -111,35 +151,52 @@ public class GameActivity extends AppCompatActivity implements ChainWordFragment
 //                myChainWordRecyclerViewAdapter.update();
 //            }
 //        });
-        // create alert dialog
-        AlertDialog alertDialog = alertDialogBuilder.create();
+            // create alert dialog
+            AlertDialog alertDialog = alertDialogBuilder.create();
 
-        // show it
-        alertDialog.show();
+//            HomeActivity.chainReactionSetTheme(alertDialog.getContext());
 
+            // show it
+            alertDialog.show();
+        } else {
+            Log.e(LOG_TAG, "alert dialog was null");
+        }
     }
 
     /**
-     * sets the score keeping box TextView tothe most recently updated score.
+     * sets the score keeping box TextView to the most recently updated score.
      * @param mScore
      */
     public void updateScore(int mScore) {
-        mScoreKeeper.setText("" + mScore);
+        Resources res = getResources();
+        mScoreKeeper.setText(String.format(res.getString(R.string.scorekeeper_text), mScore));
     }
 
     /**
      * Creates a Dialog that tells the user what their final score was
-     * and when the dialogis closed, returns to the main menu.
+     * and when the dialog is closed, returns to the main menu.
      */
     public void gameOver() {
-        AlertDialog gameOverMessage= new AlertDialog.Builder(this).create();
+        final AlertDialog gameOverMessage= new AlertDialog.Builder(this).create();
         gameOverMessage.setTitle("Game Over");
-        gameOverMessage.setMessage("Congradulations!\n" +
-                "You scored " + mScoreKeeper.getText().toString() + " points!");
-        gameOverMessage.setButton(AlertDialog.BUTTON_NEUTRAL, "Back to Main Menu",
+        gameOverMessage.setMessage("Congratulations!\n" +
+                "Your " + mScoreKeeper.getText().toString() + " points!");
+        gameOverMessage.setButton(AlertDialog.BUTTON_NEGATIVE, "Back to Main Menu",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
+                        gameOverMessage.getOwnerActivity().finish();
+                    }
+                });
+        gameOverMessage.setButton(AlertDialog.BUTTON_POSITIVE, "Share Score",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent shareIntent = new Intent(android.content.Intent.ACTION_SEND);
+                        shareIntent.setType("text/plain");
+                        shareIntent.putExtra(Intent.EXTRA_SUBJECT, "New score on Chain Reaction!");
+                        shareIntent.putExtra(Intent.EXTRA_TEXT, mScoreKeeper.getText().toString().substring("Score:".length()));
+                        startActivity(Intent.createChooser(shareIntent, "Share via"));
                     }
                 });
         gameOverMessage.setOnDismissListener(new DialogInterface.OnDismissListener() {
@@ -149,5 +206,6 @@ public class GameActivity extends AppCompatActivity implements ChainWordFragment
             }
         });
         gameOverMessage.show();
+        //TODO: Data lab has SQLite info, possibly for storing high scores
     }
 }

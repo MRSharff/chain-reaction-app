@@ -11,24 +11,29 @@
     tools:context="a450sp16team2.tacoma.uw.edu.chainreaction.GameActivity">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/activity_vertical_margin">
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:text="Score"
-            android:textSize="28sp"
-            android:layout_weight="1"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:textSize="28sp"
-            android:layout_weight="2"
-            android:text="0"
-            android:textColor="@color/colorText"
             android:id="@+id/score"
-            />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="30sp"/>
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_margin="8dp"-->
+            <!--android:text="Score"-->
+            <!--android:textSize="28sp"-->
+            <!--android:layout_weight="1"/>-->
+        <!--<TextView-->
+            <!--android:id="@+id/score"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_margin="8dp"-->
+            <!--android:textSize="28sp"-->
+            <!--android:layout_weight="2"-->
+            <!--android:text="0"-->
+            <!--android:textColor="@color/colorText" />-->
     </LinearLayout>
 
     <fragment

@@ -16,17 +16,20 @@ import java.util.List;
 
 public class MyChainWordRecyclerViewAdapter extends RecyclerView.Adapter<MyChainWordRecyclerViewAdapter.ViewHolder> {
 
+    private static final String LOG_TAG = MyChainWordRecyclerViewAdapter.class.getSimpleName();
+
     private final List<ChainWord> mValues;
     private final ChainWordFragment.OnListFragmentInteractionListener mListener;
     private ChainWordFragment mChainWordFragment;
     private int mCurrentWord;
     private int mScore;
+//    private int mPreviousWord;
 
     public MyChainWordRecyclerViewAdapter(List<ChainWord> items, ChainWordFragment.OnListFragmentInteractionListener listener,
                                           ChainWordFragment chainList) {
         mValues = items;
         mListener = listener;
-        mCurrentWord = 0;
+        mCurrentWord = 1;
         mScore = 0;
         mChainWordFragment = chainList;
     }
@@ -37,6 +40,11 @@ public class MyChainWordRecyclerViewAdapter extends RecyclerView.Adapter<MyChain
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.fragment_chainword, parent, false);
         return new ViewHolder(view);
+    }
+
+    public void updateScoreForMiss() {
+        mScore -= mChainWordFragment.getContext().getResources().getInteger(R.integer.default_miss_decrease);
+        mChainWordFragment.mGameActivity.updateScore(mScore);
     }
 
     public void update() {
@@ -52,6 +60,7 @@ public class MyChainWordRecyclerViewAdapter extends RecyclerView.Adapter<MyChain
             if (gameOver) mChainWordFragment.mGameActivity.gameOver();
         }
     }
+
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         holder.mWord = mValues.get(position);
@@ -72,6 +81,18 @@ public class MyChainWordRecyclerViewAdapter extends RecyclerView.Adapter<MyChain
 
             }
         });
+    }
+
+    public String getPreviousWord() {
+        return (mValues.get(mCurrentWord - 1).getWord());
+    }
+
+    public String getHintAndBlank() {
+        Log.d(LOG_TAG, "mCurrentWord is " + mCurrentWord);
+        int underscoreCount = mValues.get(mCurrentWord).getWord().length() -
+                mValues.get(mCurrentWord).getDisplay().length();
+        return mValues.get(mCurrentWord).getDisplay()
+                + (new String(new char[underscoreCount]).replace("\0", "_"));
     }
 
     @Override

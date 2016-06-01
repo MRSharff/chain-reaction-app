@@ -1,12 +1,15 @@
 package a450sp16team2.tacoma.uw.edu.chainreaction;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.view.ContextThemeWrapper;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -34,23 +37,25 @@ public class HomeActivity extends AppCompatActivity {
         // Set the static variable to this instance of home activity
         homeActivity = this;
 
+        chainReactionSetTheme(this);
 
-        // Get the current theme key
-        String theme = PreferenceManager.getDefaultSharedPreferences(this)
-                .getString("pref_theme_key", "AppTheme");
 
-        // set theme dependent upon selected theme key
-        if (theme.equals("AppTheme")) {
-            setTheme(R.style.AppTheme);
-        } else if (theme.equals("Deadpool")) {
-            setTheme(R.style.AppTheme_Deadpool);
-        } else if (theme.equals("Thing")) {
-            setTheme(R.style.AppTheme_Thing);
-        } else if (theme.equals("Joker")) {
-            setTheme(R.style.AppTheme_Joker);
-        } else if (theme.equals("Inception")) {
-            setTheme(R.style.AppTheme_Inception);
-        }
+//        // Get the current theme key
+//        String theme = PreferenceManager.getDefaultSharedPreferences(this)
+//                .getString("pref_theme_key", "AppTheme");
+//
+//        // set theme dependent upon selected theme key
+//        if (theme.equals("AppTheme")) {
+//            setTheme(R.style.AppTheme);
+//        } else if (theme.equals("Deadpool")) {
+//            setTheme(R.style.AppTheme_Deadpool);
+//        } else if (theme.equals("Thing")) {
+//            setTheme(R.style.AppTheme_Thing);
+//        } else if (theme.equals("Joker")) {
+//            setTheme(R.style.AppTheme_Joker);
+//        } else if (theme.equals("Inception")) {
+//            setTheme(R.style.AppTheme_Inception);
+//        }
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
@@ -104,6 +109,31 @@ public class HomeActivity extends AppCompatActivity {
     private void startSettings() {
         Intent intent = new Intent(this, SettingsActivity.class);
         startActivity(intent);
+    }
+
+    public static void chainReactionSetTheme(Context theContext) {
+        // Get the current theme key
+        String theme = PreferenceManager.getDefaultSharedPreferences(theContext)
+                .getString("pref_theme_key", "AppTheme");
+
+        // set theme dependent upon selected theme key
+        switch (theme) {
+            case "AppTheme":
+                theContext.setTheme(R.style.AppTheme);
+                break;
+            case "Deadpool":
+                theContext.setTheme(R.style.AppTheme_Deadpool);
+                break;
+            case "Thing":
+                theContext.setTheme(R.style.AppTheme_Thing);
+                break;
+            case "Joker":
+                theContext.setTheme(R.style.AppTheme_Joker);
+                break;
+            case "Inception":
+                theContext.setTheme(R.style.AppTheme_Inception);
+                break;
+        }
     }
 
 }

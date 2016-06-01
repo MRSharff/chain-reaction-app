@@ -1,7 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat">
+    <style name="AppTheme.AlertDialog" parent="Theme.AppCompat.Dialog.Alert">
         <!-- Customize your theme here. -->
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
@@ -15,13 +16,7 @@
         <item name="colorControlHighlight">@color/colorAccent</item>
     </style>
 
-    <style name="LoginTheme" parent="Theme.AppCompat.NoActionBar" />
-
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
-
-    <style name="AppTheme.Deadpool" parent="AppTheme">
+    <style name="AppTheme.Deadpool.AlertDialog" parent="AppTheme.AlertDialog">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/deadpool_colorPrimary</item>
         <!--<item name="colorPrimaryLight">@color/deadpool_colorPrimaryLight</item>-->
@@ -35,7 +30,7 @@
         <item name="colorControlHighlight">@color/deadpool_colorAccent</item>
     </style>
 
-    <style name="AppTheme.Thing" parent="AppTheme">
+    <style name="AppTheme.Thing.AlertDialog" parent="AppTheme.AlertDialog">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/thing_colorPrimary</item>
         <!--<item name="colorPrimaryLight">@color/thing_colorPrimaryLight</item>-->
@@ -49,7 +44,7 @@
         <item name="colorControlHighlight">@color/thing_colorAccent</item>
     </style>
 
-    <style name="AppTheme.Joker" parent="AppTheme">
+    <style name="AppTheme.Joker.AlertDialog" parent="AppTheme.AlertDialog">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/joker_colorPrimary</item>
         <!--<item name="colorPrimaryLight">@color/joker_colorPrimaryLight</item>-->
@@ -63,7 +58,7 @@
         <item name="colorControlHighlight">@color/joker_colorAccent</item>
     </style>
 
-    <style name="AppTheme.Inception" parent="AppTheme">
+    <style name="AppTheme.Inception.AlertDialog" parent="AppTheme.AlertDialog">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/inception_colorPrimary</item>
         <!--<item name="colorPrimaryLight">@color/inception_colorPrimaryLight</item>-->
@@ -76,7 +71,7 @@
         <item name="colorControlActivated">@color/inception_colorAccent</item>
         <item name="colorControlHighlight">@color/inception_colorAccent</item>
     </style>
-    
+
     <!--<style name=""-->
 
 </resources>

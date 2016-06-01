@@ -113,7 +113,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderManager.Lo
             Button mLoginButton = (Button) findViewById(R.id.btn_login);
             Button mPlayOfflineButton = (Button) findViewById(R.id.btn_play_offline);
             TextView mRegisterText = (TextView) findViewById(R.id.link_signup);
-            final Context context = this;
+//            final Context context = this;
 
             // Null checks
             if (mLoginButton != null && mPlayOfflineButton != null && mRegisterText != null) {
@@ -132,7 +132,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderManager.Lo
                 mRegisterText.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(context, RegisterActivity.class);
+                        Intent intent = new Intent(v.getContext(), RegisterActivity.class);
                         startActivity(intent);
                     }
                 });
