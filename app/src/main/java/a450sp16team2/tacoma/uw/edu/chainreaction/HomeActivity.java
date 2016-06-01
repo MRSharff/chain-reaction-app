@@ -19,11 +19,14 @@ import java.util.Set;
 
 public class HomeActivity extends AppCompatActivity {
 
+    private static final String LOG_TAG = HomeActivity.class.getSimpleName();
+
+
     /** Static Home activity for finishing when a user logs out */
     public static HomeActivity homeActivity;
 
-    /** Keep track of current theme resource id */
-    private Integer myCurrentTheme;
+//    /** Keep track of current theme resource id */
+//    private Integer myCurrentTheme;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,32 +34,12 @@ public class HomeActivity extends AppCompatActivity {
         // Set the static variable to this instance of home activity
         homeActivity = this;
 
-//        Log.i("Theme", "prefmanager: " + PreferenceManager.getDefaultSharedPreferences(this)
-//                .getInt("pref_theme_key", R.style.AppTheme));
 
-//        String theme = PreferenceManager.getDefaultSharedPreferences(this)
-//                .getString("pref_theme_key", "AppTheme");
-
-
-
-
-//        setTheme();
-
-//        setTheme(themeStyle);
-
-
-
-
-//        TypedValue outValue = new TypedValue();
-//        getTheme().resolveAttribute(R.attr.theme, outValue, true);
-
-
-
-        // Check if which the
+        // Get the current theme key
         String theme = PreferenceManager.getDefaultSharedPreferences(this)
                 .getString("pref_theme_key", "AppTheme");
 
-
+        // set theme dependent upon selected theme key
         if (theme.equals("AppTheme")) {
             setTheme(R.style.AppTheme);
         } else if (theme.equals("Deadpool")) {
@@ -75,20 +58,23 @@ public class HomeActivity extends AppCompatActivity {
         AppCompatButton singlePlayerButton = (AppCompatButton) findViewById(R.id.btn_singleplayer);
         AppCompatButton settingsButton = (AppCompatButton) findViewById(R.id.btn_settings);
 
+        if (singlePlayerButton != null && settingsButton != null) {
+            singlePlayerButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startSinglePlayer();
+                }
+            });
+            settingsButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startSettings();
+                }
+            });
+        } else {
+            Log.e(LOG_TAG, "A button was null");
+        }
 
-        singlePlayerButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startSinglePlayer();
-
-            }
-        });
-        settingsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startSettings();
-            }
-        });
 
 
 

@@ -74,8 +74,9 @@ public class GameActivity extends AppCompatActivity implements ChainWordFragment
                 .findViewById(R.id.input);
 
         // set dialog message
+        alertDialogBuilder.setTitle(word.toString());
+
         alertDialogBuilder
-                .setCancelable(false)
                 .setPositiveButton("OK",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog,int id) {
@@ -87,15 +88,29 @@ public class GameActivity extends AppCompatActivity implements ChainWordFragment
                                 if (!word.guess(mGuess) && !word.isRevealed) {
                                     word.revealLetter();
                                 }
+                                myChainWordRecyclerViewAdapter.notifyDataSetChanged();
+                                myChainWordRecyclerViewAdapter.update();
                             }
                         });
-        alertDialogBuilder.setOnDismissListener(new DialogInterface.OnDismissListener() {
-            @Override
-            public void onDismiss(DialogInterface dialog) {
-                myChainWordRecyclerViewAdapter.notifyDataSetChanged();
-                myChainWordRecyclerViewAdapter.update();
-            }
-        });
+
+        // Allow the user to cancel a guess so they can look at the word again
+        alertDialogBuilder
+                .setCancelable(true)
+                .setNegativeButton(R.string.cancel,
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,int id) {
+                                dialog.cancel();
+                            }
+                        });
+
+
+//        alertDialogBuilder.setOnDismissListener(new DialogInterface.OnDismissListener() {
+//            @Override
+//            public void onDismiss(DialogInterface dialog) {
+//                myChainWordRecyclerViewAdapter.notifyDataSetChanged();
+//                myChainWordRecyclerViewAdapter.update();
+//            }
+//        });
         // create alert dialog
         AlertDialog alertDialog = alertDialogBuilder.create();
 

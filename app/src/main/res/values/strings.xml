@@ -8,6 +8,8 @@
     <string name="prompt_password">Password</string>
     <string name="prompt_retype_password">Retype Password</string>
 
+    <string name="cancel">Cancel</string>
+
     <string name="login">Login</string>
     <string name="login_register_text">No account? <b><i>Register</i></b> or play offline.</string>
     <string name="play_offline">Play Offline</string>
