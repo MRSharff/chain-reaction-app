@@ -4,6 +4,9 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
@@ -14,9 +17,11 @@ import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import a450sp16team2.tacoma.uw.edu.chainreaction.data.LocalHighscoreDB;
 import a450sp16team2.tacoma.uw.edu.chainreaction.model.ChainWord;
 
 /**
@@ -29,6 +34,7 @@ public class GameActivity extends AppCompatActivity implements ChainWordFragment
 
     private String mGuess;
     private TextView mScoreKeeper;
+    private int mScore;
 
     /**
      * gets the TextView and stores it as an instance variable for updating purposes
@@ -58,6 +64,7 @@ public class GameActivity extends AppCompatActivity implements ChainWordFragment
         mScoreKeeper = (TextView) findViewById(R.id.score);
 
         //set initial score to 0
+        mScore = 0;
         updateScore(0);
     }
 
@@ -101,48 +108,52 @@ public class GameActivity extends AppCompatActivity implements ChainWordFragment
                 break;
         }
 //
-//        alertDialogBuilder = new AlertDialog.Builder(this);
+        if (alertDialogBuilder == null) {
+            // This only happens if they are first install on default theme
+            alertDialogBuilder = new AlertDialog.Builder(this);
+            Log.e(LOG_TAG, "Alert Dialog theming went wrong");
+        }
+
 
         // set prompts.xml to alertdialog builder
-        if (alertDialogBuilder != null) {
-            alertDialogBuilder.setView(promptsView);
-            final EditText userInput = (EditText) promptsView
-                    .findViewById(R.id.input);
+        alertDialogBuilder.setView(promptsView);
+        final EditText userInput = (EditText) promptsView
+                .findViewById(R.id.input);
 
-            // setup dialog
+        // setup dialog
 
-            //Set title to show hint so far
-            String previousWord = myChainWordRecyclerViewAdapter.getPreviousWord();
-            alertDialogBuilder.setTitle(getString(R.string.word_hint_dialog)
-                    + previousWord + " " + myChainWordRecyclerViewAdapter.getHintAndBlank());
+        //Set title to show hint so far
+        String previousWord = myChainWordRecyclerViewAdapter.getPreviousWord();
+        alertDialogBuilder.setTitle(getString(R.string.word_hint_dialog)
+                + previousWord + " " + myChainWordRecyclerViewAdapter.getHintAndBlank());
 
-            alertDialogBuilder
-                    .setPositiveButton(getString(R.string.guess_dialog_guess),
-                            new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog,int id) {
-                                    // get user input and set it to result
-                                    // edit text
-                                    mGuess = userInput.getText().toString();
-                                    dialog.dismiss();
-                                    //guess the word and reveal a letter if wrong
-                                    if (!word.guess(mGuess) && !word.isRevealed) {
-                                        word.revealLetter();
-                                        myChainWordRecyclerViewAdapter.updateScoreForMiss();
-                                    }
-                                    myChainWordRecyclerViewAdapter.notifyDataSetChanged();
-                                    myChainWordRecyclerViewAdapter.update();
+        alertDialogBuilder
+                .setPositiveButton(getString(R.string.guess_dialog_guess),
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,int id) {
+                                // get user input and set it to result
+                                // edit text
+                                mGuess = userInput.getText().toString();
+                                dialog.dismiss();
+                                //guess the word and reveal a letter if wrong
+                                if (!word.guess(mGuess) && !word.isRevealed) {
+                                    word.revealLetter();
+                                    myChainWordRecyclerViewAdapter.updateScoreForMiss();
                                 }
-                            });
+                                myChainWordRecyclerViewAdapter.notifyDataSetChanged();
+                                myChainWordRecyclerViewAdapter.update();
+                            }
+                        });
 
-            // Allow the user to cancel a guess so they can look at the word again
-            alertDialogBuilder
-                    .setCancelable(true)
-                    .setNegativeButton(R.string.cancel,
-                            new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog,int id) {
-                                    dialog.cancel();
-                                }
-                            });
+        // Allow the user to cancel a guess so they can look at the word again
+        alertDialogBuilder
+                .setCancelable(true)
+                .setNegativeButton(R.string.cancel,
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,int id) {
+                                dialog.cancel();
+                            }
+                        });
 
 //        alertDialogBuilder.setOnDismissListener(new DialogInterface.OnDismissListener() {
 //            @Override
@@ -151,16 +162,13 @@ public class GameActivity extends AppCompatActivity implements ChainWordFragment
 //                myChainWordRecyclerViewAdapter.update();
 //            }
 //        });
-            // create alert dialog
-            AlertDialog alertDialog = alertDialogBuilder.create();
+        // create alert dialog
+        AlertDialog alertDialog = alertDialogBuilder.create();
 
 //            HomeActivity.chainReactionSetTheme(alertDialog.getContext());
 
-            // show it
-            alertDialog.show();
-        } else {
-            Log.e(LOG_TAG, "alert dialog was null");
-        }
+        // show it
+        alertDialog.show();
     }
 
     /**
@@ -168,6 +176,7 @@ public class GameActivity extends AppCompatActivity implements ChainWordFragment
      * @param mScore
      */
     public void updateScore(int mScore) {
+        this.mScore = mScore;
         Resources res = getResources();
         mScoreKeeper.setText(String.format(res.getString(R.string.scorekeeper_text), mScore));
     }
@@ -177,6 +186,10 @@ public class GameActivity extends AppCompatActivity implements ChainWordFragment
      * and when the dialog is closed, returns to the main menu.
      */
     public void gameOver() {
+
+        //This could probably be somewhere else but for right now it's going here.
+        saveScore();
+
         final AlertDialog gameOverMessage= new AlertDialog.Builder(this).create();
         gameOverMessage.setTitle("Game Over");
         gameOverMessage.setMessage("Congratulations!\n" +
@@ -185,7 +198,6 @@ public class GameActivity extends AppCompatActivity implements ChainWordFragment
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
-                        gameOverMessage.getOwnerActivity().finish();
                     }
                 });
         gameOverMessage.setButton(AlertDialog.BUTTON_POSITIVE, "Share Score",
@@ -207,5 +219,15 @@ public class GameActivity extends AppCompatActivity implements ChainWordFragment
         });
         gameOverMessage.show();
         //TODO: Data lab has SQLite info, possibly for storing high scores
+    }
+
+    private void saveScore() {
+        String username = getSharedPreferences(getString(R.string.LOGIN_PREFS),Context.MODE_PRIVATE).getString(getString(R.string.LOGGEDIN_USERNAME), "OFFLINEUSER");
+//        String username = PreferenceManager.getDefaultSharedPreferences(this).getString(getString(R.string.LOGGEDIN_USERNAME), "OFFLINEUSER");
+//        String scoreString = mScoreKeeper.getText().toString().substring("Score:".length());
+//        int score = Integer.parseInt(scoreString);
+        LocalHighscoreDB highscoreDB = new LocalHighscoreDB(this);
+        highscoreDB.insertHighscore(username, mScore, this);
+        Log.i(LOG_TAG, "Saved score: " + username + ", Score: " + mScore);
     }
 }

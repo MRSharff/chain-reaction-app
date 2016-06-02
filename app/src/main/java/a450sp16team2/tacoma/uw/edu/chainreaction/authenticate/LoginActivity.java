@@ -358,8 +358,11 @@ public class LoginActivity extends AppCompatActivity implements LoaderManager.Lo
 
             if (success) {
                 //Only set the shared prefs to "logged in" if we actually successfully log in
-                mSharedPreferences.edit().putBoolean(getString(R.string.LOGGEDIN), true).apply();
-                mSharedPreferences.edit().putString(getString(R.string.LOGGEDIN_USERNAME), mUsername);
+                SharedPreferences.Editor editor = mSharedPreferences.edit();
+                editor.putBoolean(getString(R.string.LOGGEDIN), true).apply();
+                editor.putString(getString(R.string.LOGGEDIN_USERNAME), mUsername).apply();
+//                PreferenceManager.getDefaultSharedPreferences(this).edit().
+
                 Intent intent = new Intent(mContext, HomeActivity.class);
                 startActivity(intent);
                 finish();

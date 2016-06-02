@@ -12,7 +12,8 @@
     <color name="deadpool_colorPrimary">#E43F3F</color>
     <color name="deadpool_colorPrimaryLight">#F6C5C5</color>
     <color name="deadpool_colorPrimaryDark">#E12929</color>
-    <color name="deadpool_colorAccent">#616161</color>
+    <color name="deadpool_colorAccent">#FFFFFF</color>
+    <!--<color name="deadpool_colorAccent">#616161</color>-->
     <color name="deadpool_textColorPrimary">#212121</color>
     <color name="deadpool_textColorSecondary">#727272</color>
     <color name="deadpool_colorDivider">#B6B6B6</color>

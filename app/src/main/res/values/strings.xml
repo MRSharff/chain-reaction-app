@@ -8,11 +8,13 @@
     <string name="prompt_password">Password</string>
     <string name="prompt_retype_password">Retype Password</string>
 
+    <string name="login_toast">Logged in as %1$s</string>
+
     <string name="scorekeeper_text">Score: %1$d</string>
 
     <string name="cancel">Cancel</string>
 
-    <string name="word_hint_dialog">Currently Guessing for:</string>
+    <string name="word_hint_dialog">Current phrase:</string>
     <string name="guess_dialog_guess">Guess</string>
 
     <string name="login">Login</string>
@@ -141,5 +143,28 @@
     <string name="title_activity_highscore">Highscores</string>
     <string name="action_settings">Settings</string>
     <string name="section_format">Hello World from section: %1$d</string>
+
+    <!-- Highscore strings -->
+    <string name="rank">Rank</string>
+    <string name="user">User</string>
+    <string name="score">Score</string>
+
+    <string name="local_highscores">Local Highscores</string>
+    <string name="tab0">@string/local_highscores</string>
+
+    <!-- SQLite queries -->
+    <string name="CREATE_LOCALHIGHSCORES_SQL">
+        CREATE TABLE IF NOT EXISTS LocalHighscores
+        (_id INTEGER PRIMARY KEY AUTOINCREMENT, username STRING, score INTEGER);
+    </string>
+
+    <string name="DROP_LOCALHIGHSCORES_SQL">
+        DROP TABLE IF EXISTS LocalHighscores
+    </string>
+
+    <string name="score_save_success">Score successfully saved!</string>
+    <string name="score_save_failed">Score not saved :(</string>
+
+
 
 </resources>

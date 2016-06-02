@@ -15,10 +15,13 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
+import android.widget.Toast;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+
+import a450sp16team2.tacoma.uw.edu.chainreaction.data.LocalHighscoreDB;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -62,8 +65,9 @@ public class HomeActivity extends AppCompatActivity {
 
         AppCompatButton singlePlayerButton = (AppCompatButton) findViewById(R.id.btn_singleplayer);
         AppCompatButton settingsButton = (AppCompatButton) findViewById(R.id.btn_settings);
+        AppCompatButton highscoreButton = (AppCompatButton) findViewById(R.id.btn_highscores);
 
-        if (singlePlayerButton != null && settingsButton != null) {
+        if (singlePlayerButton != null && settingsButton != null && highscoreButton != null) {
             singlePlayerButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -76,12 +80,19 @@ public class HomeActivity extends AppCompatActivity {
                     startSettings();
                 }
             });
+            highscoreButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startHighscore();
+                }
+            });
         } else {
             Log.e(LOG_TAG, "A button was null");
         }
 
-
-
+//        String username = PreferenceManager.getDefaultSharedPreferences(this).getString(getString(R.string.LOGGEDIN_USERNAME), "OFFLINEUSER"); // does not work
+        String username = getSharedPreferences(getString(R.string.LOGIN_PREFS),Context.MODE_PRIVATE).getString(getString(R.string.LOGGEDIN_USERNAME), "OFFLINEUSER");
+        Toast.makeText(this, String.format(getString(R.string.login_toast), username), Toast.LENGTH_SHORT).show();
 
         //TODO: Update functionality on Online play to grey out button if no internet connection
         //TODO: Or, have it pop up an alert dialog saying that we need an internet connection
@@ -108,6 +119,13 @@ public class HomeActivity extends AppCompatActivity {
 
     private void startSettings() {
         Intent intent = new Intent(this, SettingsActivity.class);
+        startActivity(intent);
+    }
+
+    private void startHighscore() {
+//        LocalHighscoreDB db = new LocalHighscoreDB(this);
+//        db.dropTables();
+        Intent intent = new Intent(this, HighscoreActivity.class);
         startActivity(intent);
     }
 

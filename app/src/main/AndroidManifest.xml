@@ -46,14 +46,7 @@
             android:name=".SettingsActivity"
             android:label="@string/Settings"
             android:theme="@style/AppTheme" />
-        <activity
-            android:name=".HighscoreActivity"
-            android:label="@string/title_activity_highscore"
-            android:parentActivityName=".HomeActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="a450sp16team2.tacoma.uw.edu.chainreaction.HomeActivity" />
-        </activity>
+        <activity android:name=".HighscoreActivity"></activity>
     </application>
 
 </manifest>
