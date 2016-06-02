@@ -71,79 +71,79 @@ public class GameActivity extends AppCompatActivity implements ChainWordFragment
                     (Context.LAYOUT_INFLATER_SERVICE);
             View promptsView = li.inflate(R.layout.prompt, null);
 
-        // Get the current theme key
-        String theme = PreferenceManager.getDefaultSharedPreferences(this)
-                .getString("pref_theme_key", "AppTheme");
+            // Get the current theme key
+            String theme = PreferenceManager.getDefaultSharedPreferences(this)
+                    .getString("pref_theme_key", "AppTheme");
 
-        AlertDialog.Builder alertDialogBuilder = null;
+            AlertDialog.Builder alertDialogBuilder = null;
 
-        // set theme dependent upon selected theme key
-        switch (theme) {
-            case "AppTheme":
-                alertDialogBuilder = new AlertDialog.Builder(this, R.style.AppTheme_AlertDialog);
-                break;
-            case "Deadpool":
-                alertDialogBuilder = new AlertDialog.Builder(this, R.style.AppTheme_Deadpool_AlertDialog);
-                break;
-            case "Thing":
-                alertDialogBuilder = new AlertDialog.Builder(this, R.style.AppTheme_Thing_AlertDialog);
-                break;
-            case "Joker":
-                alertDialogBuilder = new AlertDialog.Builder(this, R.style.AppTheme_Joker_AlertDialog);
-                break;
-            case "Inception":
-                alertDialogBuilder = new AlertDialog.Builder(this, R.style.AppTheme_Inception_AlertDialog);
-                break;
-        }
+            // set theme dependent upon selected theme key
+            switch (theme) {
+                case "AppTheme":
+                    alertDialogBuilder = new AlertDialog.Builder(this, R.style.AppTheme_AlertDialog);
+                    break;
+                case "Deadpool":
+                    alertDialogBuilder = new AlertDialog.Builder(this, R.style.AppTheme_Deadpool_AlertDialog);
+                    break;
+                case "Thing":
+                    alertDialogBuilder = new AlertDialog.Builder(this, R.style.AppTheme_Thing_AlertDialog);
+                    break;
+                case "Joker":
+                    alertDialogBuilder = new AlertDialog.Builder(this, R.style.AppTheme_Joker_AlertDialog);
+                    break;
+                case "Inception":
+                    alertDialogBuilder = new AlertDialog.Builder(this, R.style.AppTheme_Inception_AlertDialog);
+                    break;
+            }
 //
-        if (alertDialogBuilder == null) {
-            // This only happens if they are first install on default theme
-            alertDialogBuilder = new AlertDialog.Builder(this);
-            Log.e(LOG_TAG, "Alert Dialog theming went wrong");
-        }
+            if (alertDialogBuilder == null) {
+                // This only happens if they are first install on default theme
+                alertDialogBuilder = new AlertDialog.Builder(this);
+                Log.e(LOG_TAG, "Alert Dialog theming went wrong");
+            }
 
 
-        // set prompts.xml to alertdialog builder
-        alertDialogBuilder.setView(promptsView);
+            // set prompts.xml to alertdialog builder
+            alertDialogBuilder.setView(promptsView);
 
-        final EditText userInput = (EditText) promptsView
-                .findViewById(R.id.input);
+            final EditText userInput = (EditText) promptsView
+                    .findViewById(R.id.input);
 
-        // setup dialog
+            // setup dialog
 
-        //Set title to show hint so far
-        String previousWord = myChainWordRecyclerViewAdapter.getPreviousWord();
-        alertDialogBuilder.setTitle(getString(R.string.word_hint_dialog)
-                + previousWord + " " + myChainWordRecyclerViewAdapter.getHintAndBlank());
+            //Set title to show hint so far
+            String previousWord = myChainWordRecyclerViewAdapter.getPreviousWord();
+            alertDialogBuilder.setTitle(getString(R.string.word_hint_dialog)
+                    + previousWord + " " + myChainWordRecyclerViewAdapter.getHintAndBlank());
 
-        alertDialogBuilder
-                .setPositiveButton(getString(R.string.guess_dialog_guess),
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog,int id) {
-                                // get user input and set it to result
-                                // edit text
-                                mGuess = userInput.getText().toString();
-                                dialog.dismiss();
-                                //guess the word and reveal a letter if wrong
-                                if (!word.guess(mGuess) && !word.isRevealed) {
-                                    word.revealLetter();
-                                    myChainWordRecyclerViewAdapter.updateScoreForMiss();
+            alertDialogBuilder
+                    .setPositiveButton(getString(R.string.guess_dialog_guess),
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    // get user input and set it to result
+                                    // edit text
+                                    mGuess = userInput.getText().toString();
+                                    dialog.dismiss();
+                                    //guess the word and reveal a letter if wrong
+                                    if (!word.guess(mGuess) && !word.isRevealed) {
+                                        word.revealLetter();
+                                        myChainWordRecyclerViewAdapter.updateScoreForMiss();
+                                    }
+                                    myChainWordRecyclerViewAdapter.notifyDataSetChanged();
+                                    myChainWordRecyclerViewAdapter.update();
+                                    holder.animateView();
                                 }
-                                myChainWordRecyclerViewAdapter.notifyDataSetChanged();
-                                myChainWordRecyclerViewAdapter.update();
-                                holder.animateView();
-                            }
-                        });
+                            });
 
-        // Allow the user to cancel a guess so they can look at the word again
-        alertDialogBuilder
-                .setCancelable(true)
-                .setNegativeButton(R.string.cancel,
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog,int id) {
-                                dialog.cancel();
-                            }
-                        });
+            // Allow the user to cancel a guess so they can look at the word again
+            alertDialogBuilder
+                    .setCancelable(true)
+                    .setNegativeButton(R.string.cancel,
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    dialog.cancel();
+                                }
+                            });
 
 //        alertDialogBuilder.setOnDismissListener(new DialogInterface.OnDismissListener() {
 //            @Override
@@ -152,12 +152,13 @@ public class GameActivity extends AppCompatActivity implements ChainWordFragment
 //                myChainWordRecyclerViewAdapter.update();
 //            }
 //        });
-        // create alert dialog
-        AlertDialog alertDialog = alertDialogBuilder.create();
+            // create alert dialog
+            AlertDialog alertDialog = alertDialogBuilder.create();
 
-        // show it
-        alertDialog.show();
+            // show it
+            alertDialog.show();
 
+        }
     }
 
     /**

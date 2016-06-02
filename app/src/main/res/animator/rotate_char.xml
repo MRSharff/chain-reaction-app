@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android"
+    android:ordering="sequentially">
+    <objectAnimator android:duration="0">
+        <propertyValuesHolder
+            android:propertyName="textColor"
+            android:valueFrom="#000000"
+            android:valueTo="#00000000" />
+    </objectAnimator>
+    <objectAnimator android:duration="200">
+        <propertyValuesHolder
+            android:propertyName="rotationX"
+            android:valueFrom="0"
+            android:valueTo="360" />
+    </objectAnimator>
+    <objectAnimator android:duration="0">
+        <propertyValuesHolder
+            android:propertyName="textColor"
+            android:valueTo="#000000" />
+    </objectAnimator>
+
+</set>
