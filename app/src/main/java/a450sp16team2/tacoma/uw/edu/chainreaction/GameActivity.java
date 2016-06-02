@@ -39,53 +39,56 @@ public class GameActivity extends AppCompatActivity implements ChainWordFragment
      *  and checks it against the word they are guessing against. when a guess is incorrect,
      *  reveal another letter then when the prompt is closed, it notifies the adapter to both
      *  redraw its fragments and update some internal values.
-     * @param word The ChainWord reference that was clicked on
+     * @param holder The ChainWord ViewHolder reference that was clicked on
      * @param myChainWordRecyclerViewAdapter Adapter that causes behavior with the fragment.
      */
     @Override
-    public void onListFragmentInteraction(final ChainWord word, final MyChainWordRecyclerViewAdapter myChainWordRecyclerViewAdapter) {
+    public void onListFragmentInteraction(final MyChainWordRecyclerViewAdapter.ViewHolder holder, final MyChainWordRecyclerViewAdapter myChainWordRecyclerViewAdapter) {
         // get prompts.xml view
-        LayoutInflater li = (LayoutInflater)getApplicationContext().getSystemService
-                (Context.LAYOUT_INFLATER_SERVICE);
-        View promptsView = li.inflate(R.layout.prompt, null);
+        final ChainWord word = holder.mWord;
+        if (myChainWordRecyclerViewAdapter.isCurrent(word)) {
+            LayoutInflater li = (LayoutInflater) getApplicationContext().getSystemService
+                    (Context.LAYOUT_INFLATER_SERVICE);
+            View promptsView = li.inflate(R.layout.prompt, null);
 
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
 
-        // set prompts.xml to alertdialog builder
-        alertDialogBuilder.setView(promptsView);
+            // set prompts.xml to alertdialog builder
+            alertDialogBuilder.setView(promptsView);
 
-        final EditText userInput = (EditText) promptsView
-                .findViewById(R.id.input);
+            final EditText userInput = (EditText) promptsView
+                    .findViewById(R.id.input);
 
-        // set dialog message
-        alertDialogBuilder
-                .setCancelable(false)
-                .setPositiveButton("OK",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog,int id) {
-                                // get user input and set it to result
-                                // edit text
-                                mGuess = userInput.getText().toString();
-                                dialog.dismiss();
-                                //guess the word and reveal a letter if wrong
-                                if (!word.guess(mGuess) && !word.isRevealed) {
-                                    word.revealLetter();
+            // set dialog message
+            alertDialogBuilder
+                    .setCancelable(false)
+                    .setPositiveButton("OK",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    // get user input and set it to result
+                                    // edit text
+                                    mGuess = userInput.getText().toString();
+                                    dialog.dismiss();
+                                    //guess the word and reveal a letter if wrong
+                                    if (!word.guess(mGuess) && !word.isRevealed) {
+                                        word.revealLetter();
+                                    }
                                 }
-                            }
-                        });
-        alertDialogBuilder.setOnDismissListener(new DialogInterface.OnDismissListener() {
-            @Override
-            public void onDismiss(DialogInterface dialog) {
-                myChainWordRecyclerViewAdapter.notifyDataSetChanged();
-                myChainWordRecyclerViewAdapter.update();
-            }
-        });
-        // create alert dialog
-        AlertDialog alertDialog = alertDialogBuilder.create();
+                            });
+            alertDialogBuilder.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                @Override
+                public void onDismiss(DialogInterface dialog) {
+                    myChainWordRecyclerViewAdapter.notifyDataSetChanged();
+                    myChainWordRecyclerViewAdapter.update();
+                    holder.animateView();
+                }
+            });
+            // create alert dialog
+            AlertDialog alertDialog = alertDialogBuilder.create();
 
-        // show it
-        alertDialog.show();
-
+            // show it
+            alertDialog.show();
+        }
     }
 
     /**

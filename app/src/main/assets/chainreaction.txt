@@ -91,8 +91,6 @@ air ship
 air pump
 air borne
 stereo output
-air conditioning
-army conditioning
 stock market
 free market
 powder coat
@@ -124,7 +122,6 @@ machine code
 machine learning
 time vault
 time out
-physical conditioning
 get physical
 get out
 get rekt
@@ -173,7 +170,6 @@ house call
 house broken
 house democrat
 house republican
-house representative
 house fire
 house music
 fire sale
@@ -182,7 +178,6 @@ fire fighter
 fire hydrant
 fire bug
 fire starter
-fire extinguisher
 fire bomb
 fire blast
 fire alarm
@@ -205,7 +200,6 @@ starter wife
 starter fluid
 republican congress
 democrat congress
-representative democracy
 congress session
 democrat convention
 convention center
@@ -275,7 +269,6 @@ paper crane
 paper stack
 paper prototype
 paper back
-construction paper
 box car
 box theater
 box cake
@@ -353,10 +346,8 @@ cannon fodder
 nick cannon
 beat nick
 saint nick
-new-orleans saint
 saint louis
 louis armstrong
-new-orleans louisiana
 louisiana purchase
 cold case
 case study

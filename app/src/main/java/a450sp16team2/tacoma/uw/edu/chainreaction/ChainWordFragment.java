@@ -28,6 +28,7 @@ public class ChainWordFragment extends Fragment {
 
     private static final String ARG_COLUMN_COUNT = "column-count";
     private int mColumnCount = 1;
+
     private int mCurrentWord;
     private List<ChainWord> mWords;
     private OnListFragmentInteractionListener mListener;
@@ -57,6 +58,7 @@ public class ChainWordFragment extends Fragment {
             ChainWord c = new ChainWord(s);
             if (s.equals(theWords.get(0))) {
                 c.makeRevealed();
+                mCurrentWord = 1;
             } else if (s.equals(theWords.get(1))) {
                 c.revealLetter();
             }
@@ -64,6 +66,13 @@ public class ChainWordFragment extends Fragment {
         }
     }
 
+    public void setmCurrentWord(int theWord) {
+        this.mCurrentWord = theWord;
+    }
+
+    public int getmCurrentWord() {
+        return mCurrentWord;
+    }
     /**
      * onCreate Makes a wordListGenerator which generates the listof linked words for the game.
      * this is the model for the game.
@@ -79,7 +88,7 @@ public class ChainWordFragment extends Fragment {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
         }
         try {
-            mWordListGenerator = new WordListGenerator(6, getActivity().getAssets().open("chainreaction.txt"));
+            mWordListGenerator = new WordListGenerator(11, getActivity().getAssets().open("chainreaction.txt"));
             mWordListGenerator.buildChain();
             setWords(mWordListGenerator.getWordList());
         } catch (IOException e) {
@@ -147,6 +156,6 @@ public class ChainWordFragment extends Fragment {
      */
     public interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onListFragmentInteraction(ChainWord item, MyChainWordRecyclerViewAdapter myChainWordRecyclerViewAdapter);
+        void onListFragmentInteraction(MyChainWordRecyclerViewAdapter.ViewHolder item, MyChainWordRecyclerViewAdapter myChainWordRecyclerViewAdapter);
     }
 }
