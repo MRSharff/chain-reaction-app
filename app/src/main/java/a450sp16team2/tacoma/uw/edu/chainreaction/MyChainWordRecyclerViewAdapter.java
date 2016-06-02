@@ -1,13 +1,19 @@
 package a450sp16team2.tacoma.uw.edu.chainreaction;
 
-import android.graphics.drawable.Drawable;
-import android.support.v4.content.res.ResourcesCompat;
+import android.animation.Animator;
+import android.animation.AnimatorInflater;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.RotateAnimation;
 import android.widget.TextView;
 
+import java.io.Console;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -119,6 +125,51 @@ public class MyChainWordRecyclerViewAdapter extends RecyclerView.Adapter<MyChain
         }
 
         public void animateView() {
+            Animator[] tiles = new Animator[10];
+            Animator set = (Animator) AnimatorInflater.loadAnimator(mView.getContext(),
+                    R.animator.rotate_char);
+            set.setTarget(mLetter1);
+            tiles[0] = set;
+            set = (Animator) AnimatorInflater.loadAnimator(mView.getContext(),
+                    R.animator.rotate_char);
+            set.setTarget(mLetter2);
+            tiles[1] = set;
+            set = (Animator) AnimatorInflater.loadAnimator(mView.getContext(),
+                    R.animator.rotate_char);
+            set.setTarget(mLetter3);
+            tiles[2] = set;
+            set = (Animator) AnimatorInflater.loadAnimator(mView.getContext(),
+                    R.animator.rotate_char);
+            set.setTarget(mLetter4);
+            tiles[3] = set;
+            set = (Animator) AnimatorInflater.loadAnimator(mView.getContext(),
+                    R.animator.rotate_char);
+            set.setTarget(mLetter5);
+            tiles[4] = set;
+            set = (Animator) AnimatorInflater.loadAnimator(mView.getContext(),
+                    R.animator.rotate_char);
+            set.setTarget(mLetter6);
+            tiles[5] = set;
+            set = (Animator) AnimatorInflater.loadAnimator(mView.getContext(),
+                    R.animator.rotate_char);
+            set.setTarget(mLetter7);
+            tiles[6] = set;
+            set = (Animator) AnimatorInflater.loadAnimator(mView.getContext(),
+                    R.animator.rotate_char);
+            set.setTarget(mLetter8);
+            tiles[7] = set;
+            set = (Animator) AnimatorInflater.loadAnimator(mView.getContext(),
+                    R.animator.rotate_char);
+            set.setTarget(mLetter9);
+            tiles[8] = set;
+            set = (Animator) AnimatorInflater.loadAnimator(mView.getContext(),
+                    R.animator.rotate_char);
+            set.setTarget(mLetter10);
+            tiles[9] = set;
+
+            AnimatorSet as = new AnimatorSet();
+            as.playSequentially(tiles);
+            as.start();
 
         }
 

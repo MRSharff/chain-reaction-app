@@ -2,6 +2,7 @@ package a450sp16team2.tacoma.uw.edu.chainreaction;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.os.AsyncTask;
 import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
@@ -76,9 +77,11 @@ public class GameActivity extends AppCompatActivity implements ChainWordFragment
                                 }
                             });
             alertDialogBuilder.setOnDismissListener(new DialogInterface.OnDismissListener() {
+
                 @Override
                 public void onDismiss(DialogInterface dialog) {
                     myChainWordRecyclerViewAdapter.notifyDataSetChanged();
+
                     myChainWordRecyclerViewAdapter.update();
                     holder.animateView();
                 }
@@ -89,6 +92,7 @@ public class GameActivity extends AppCompatActivity implements ChainWordFragment
             // show it
             alertDialog.show();
         }
+
     }
 
     /**
@@ -123,3 +127,4 @@ public class GameActivity extends AppCompatActivity implements ChainWordFragment
         gameOverMessage.show();
     }
 }
+
