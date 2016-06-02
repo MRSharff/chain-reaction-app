@@ -45,20 +45,6 @@ public class GameActivity extends AppCompatActivity implements ChainWordFragment
 
         HomeActivity.chainReactionSetTheme(this);
 
-//        String theme = PreferenceManager.getDefaultSharedPreferences(this)
-//                .getString("pref_theme_key", "AppTheme");
-//        if (theme.equals("AppTheme")) {
-//            setTheme(R.style.AppTheme);
-//        } else if (theme.equals("Deadpool")) {
-//            setTheme(R.style.AppTheme_Deadpool);
-//        } else if (theme.equals("Thing")) {
-//            setTheme(R.style.AppTheme_Thing);
-//        } else if (theme.equals("Joker")) {
-//            setTheme(R.style.AppTheme_Joker);
-//        } else if (theme.equals("Inception")) {
-//            setTheme(R.style.AppTheme_Inception);
-//        }
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
         mScoreKeeper = (TextView) findViewById(R.id.score);
@@ -73,15 +59,17 @@ public class GameActivity extends AppCompatActivity implements ChainWordFragment
      *  and checks it against the word they are guessing against. when a guess is incorrect,
      *  reveal another letter then when the prompt is closed, it notifies the adapter to both
      *  redraw its fragments and update some internal values.
-     * @param word The ChainWord reference that was clicked on
+     * @param holder The ChainWord ViewHolder reference that was clicked on
      * @param myChainWordRecyclerViewAdapter Adapter that causes behavior with the fragment.
      */
     @Override
-    public void onListFragmentInteraction(final ChainWord word, final MyChainWordRecyclerViewAdapter myChainWordRecyclerViewAdapter) {
+    public void onListFragmentInteraction(final MyChainWordRecyclerViewAdapter.ViewHolder holder, final MyChainWordRecyclerViewAdapter myChainWordRecyclerViewAdapter) {
         // get prompts.xml view
-        LayoutInflater li = (LayoutInflater)getApplicationContext().getSystemService
-                (Context.LAYOUT_INFLATER_SERVICE);
-        View promptsView = li.inflate(R.layout.prompt, null);
+        final ChainWord word = holder.mWord;
+        if (myChainWordRecyclerViewAdapter.isCurrent(word)) {
+            LayoutInflater li = (LayoutInflater) getApplicationContext().getSystemService
+                    (Context.LAYOUT_INFLATER_SERVICE);
+            View promptsView = li.inflate(R.layout.prompt, null);
 
         // Get the current theme key
         String theme = PreferenceManager.getDefaultSharedPreferences(this)
@@ -117,6 +105,7 @@ public class GameActivity extends AppCompatActivity implements ChainWordFragment
 
         // set prompts.xml to alertdialog builder
         alertDialogBuilder.setView(promptsView);
+
         final EditText userInput = (EditText) promptsView
                 .findViewById(R.id.input);
 
@@ -142,6 +131,7 @@ public class GameActivity extends AppCompatActivity implements ChainWordFragment
                                 }
                                 myChainWordRecyclerViewAdapter.notifyDataSetChanged();
                                 myChainWordRecyclerViewAdapter.update();
+                                holder.animateView();
                             }
                         });
 
@@ -165,10 +155,9 @@ public class GameActivity extends AppCompatActivity implements ChainWordFragment
         // create alert dialog
         AlertDialog alertDialog = alertDialogBuilder.create();
 
-//            HomeActivity.chainReactionSetTheme(alertDialog.getContext());
-
         // show it
         alertDialog.show();
+
     }
 
     /**
