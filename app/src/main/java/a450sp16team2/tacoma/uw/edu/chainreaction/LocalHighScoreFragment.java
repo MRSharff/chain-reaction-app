@@ -27,7 +27,6 @@ public class LocalHighScoreFragment extends Fragment {
     private RecyclerView.LayoutManager mLayoutManager;
     private LocalHighscoreDB mLocalHighscoreDB;
 
-
     public LocalHighScoreFragment() {
         // Required empty public constructor
     }
@@ -42,6 +41,7 @@ public class LocalHighScoreFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         mPage = getArguments().getInt(ARG_PAGE);
     }

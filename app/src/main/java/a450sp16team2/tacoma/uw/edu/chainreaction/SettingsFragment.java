@@ -34,7 +34,6 @@ import a450sp16team2.tacoma.uw.edu.chainreaction.authenticate.LoginActivity;
  */
 public class SettingsFragment extends PreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener {
 
-
     SharedPreferences.OnSharedPreferenceChangeListener mListener;
     SettingsActivity mSettingsActivity;
 
@@ -45,6 +44,7 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRetainInstance(true);
         addPreferencesFromResource(R.xml.general_settings);
 
         Preference loginButton = findPreference(getString(R.string.logout_key));
@@ -108,6 +108,25 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
             return;
         }
 
+//        Intent homeintent = HomeActivity.homeActivity.getIntent();
+//        startActivity(homeintent);
+
+        try {
+            HomeActivity.homeActivity.recreate();
+            getActivity().recreate();
+        } catch (NullPointerException e) {
+            // brown hair don't care
+            // for some reason, if we don't do this, the app will crash
+            // but then be like, "jk we're still working"
+            // so if we do this, changing themes will not crash the app
+            // This workaround feels dirty but it works... for now.
+        }
+
+
+//        HomeActivity.homeActivity.startActivity(IntentCompat.makeRestartActivityTask(getActivity().getComponentName()));
+//        getActivity().finish();
+
+
 //        try {
 //            ActivityInfo[] list = HomeActivity.homeActivity.getPackageManager().getPackageInfo(HomeActivity.homeActivity.getPackageName(),PackageManager.GET_ACTIVITIES).activities;
 //
@@ -141,7 +160,9 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
 //        }
 
 //        getActivity().finish();
-        HomeActivity.homeActivity.recreate();
+//        HomeActivity.homeActivity.refreshUI();
+//        HomeActivity.homeActivity.recreate();
+//        this.getActivity().recreate();
 //        getActivity().recreate();
 //        getActivity().
 //        getActivity().getFragmentManager().beginTransaction().remove(this).commit();
@@ -150,9 +171,10 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
 //            getActivity().finish();
 //        }
 
-        Intent newSettingsIntent = new Intent(HomeActivity.homeActivity, SettingsActivity.class);
-        HomeActivity.homeActivity.startActivity(newSettingsIntent);
-        getActivity().finish();
+//        Intent newSettingsIntent = new Intent(HomeActivity.homeActivity, SettingsActivity.class);
+//        HomeActivity.homeActivity.startActivity(newSettingsIntent);
+//
+//        getActivity().finish();
 
 
 //        SettingsActivity settingsActivity;
