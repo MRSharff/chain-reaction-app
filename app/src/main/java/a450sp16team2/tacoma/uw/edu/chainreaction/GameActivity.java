@@ -131,7 +131,7 @@ public class GameActivity extends AppCompatActivity implements ChainWordFragment
                                     }
                                     myChainWordRecyclerViewAdapter.notifyDataSetChanged();
                                     myChainWordRecyclerViewAdapter.update();
-                                    holder.animateView();
+//                                    holder.animateView(); // does not work properly yet
                                 }
                             });
 
