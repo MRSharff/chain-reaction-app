@@ -88,7 +88,7 @@ public class ChainWordFragment extends Fragment {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
         }
         try {
-            mWordListGenerator = new WordListGenerator(11, getActivity().getAssets().open("chainreaction.txt"));
+            mWordListGenerator = new WordListGenerator(8, getActivity().getAssets().open("chainreaction.txt"));
             mWordListGenerator.buildChain();
             setWords(mWordListGenerator.getWordList());
         } catch (IOException e) {
