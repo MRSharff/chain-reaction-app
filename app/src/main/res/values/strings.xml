@@ -148,6 +148,7 @@
     <string name="rank">Rank</string>
     <string name="user">User</string>
     <string name="score">Score</string>
+    <string name="local_highscore_placeholder_text">No highscores have been recorder yet</string>
 
     <string name="local_highscores">Local Highscores</string>
     <string name="tab0">@string/local_highscores</string>

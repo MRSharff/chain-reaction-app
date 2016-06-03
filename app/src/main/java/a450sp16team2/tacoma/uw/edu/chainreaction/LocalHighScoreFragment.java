@@ -8,8 +8,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
+
+import java.util.List;
 
 import a450sp16team2.tacoma.uw.edu.chainreaction.data.LocalHighscoreDB;
+import a450sp16team2.tacoma.uw.edu.chainreaction.model.Highscore;
 
 
 /**
@@ -74,11 +80,20 @@ public class LocalHighScoreFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_local_high_score, container, false);
 
+        mLocalHighscoreDB = new LocalHighscoreDB(getContext());
+
+        List<Highscore> highScoreList = mLocalHighscoreDB.getLocalHighscores();
+
+        if (highScoreList.size() == 0) {
+            TextView noScoresTextView = (TextView) view.findViewById(R.id.highscore_placeholder);
+            noScoresTextView.setVisibility(TextView.VISIBLE);
+        }
+
         mRecyclerView = (RecyclerView) view.findViewById(R.id.highscore_recycler_view);
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        mLocalHighscoreDB = new LocalHighscoreDB(getContext());
+
 //        AsyncHighscoreGrabber highscoreGrabber = new AsyncHighscoreGrabber(getContext());
 //        highscoreGrabber.execute();
 
@@ -87,5 +102,4 @@ public class LocalHighScoreFragment extends Fragment {
         mRecyclerView.setAdapter(mAdapter);
         return view;
     }
-
 }

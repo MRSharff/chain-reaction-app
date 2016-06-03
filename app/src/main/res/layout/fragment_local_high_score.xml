@@ -38,6 +38,16 @@
             android:textAppearance="?attr/textAppearanceListItem" />
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/highscore_placeholder"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="15dp"
+        android:gravity="center_horizontal"
+        android:text="@string/local_highscore_placeholder_text"
+        android:textSize="25sp"
+        android:visibility="gone"/>
+
     <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
