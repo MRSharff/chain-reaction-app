@@ -2,7 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal" >
+    android:orientation="horizontal"
+    android:layout_marginBottom="3dp"
+    android:background="@drawable/wordbox">
 
     <TextView
         android:layout_width="35dp"
@@ -11,7 +13,7 @@
         android:background="@drawable/letterbox"
         android:gravity="center"
         android:textSize="24dp"
-        android:textColor="#000000"
+        android:textColor="?attr/colorPrimary"
         android:id="@+id/letter1"/>
 
     <TextView
@@ -21,7 +23,7 @@
         android:background="@drawable/letterbox"
         android:gravity="center"
         android:textSize="24dp"
-        android:textColor="#000000"
+        android:textColor="?attr/colorPrimary"
         android:id="@+id/letter2"/>
 
     <TextView
@@ -31,7 +33,7 @@
         android:background="@drawable/letterbox"
         android:gravity="center"
         android:textSize="24dp"
-        android:textColor="#000000"
+        android:textColor="?attr/colorPrimary"
         android:id="@+id/letter3"/>
 
     <TextView
@@ -41,7 +43,7 @@
         android:background="@drawable/letterbox"
         android:gravity="center"
         android:textSize="24dp"
-        android:textColor="#000000"
+        android:textColor="?attr/colorPrimary"
         android:id="@+id/letter4"/>
 
     <TextView
@@ -51,7 +53,7 @@
         android:background="@drawable/letterbox"
         android:gravity="center"
         android:textSize="24dp"
-        android:textColor="#000000"
+        android:textColor="?attr/colorPrimary"
         android:id="@+id/letter5"/>
 
     <TextView
@@ -61,7 +63,7 @@
         android:background="@drawable/letterbox"
         android:gravity="center"
         android:textSize="24dp"
-        android:textColor="#000000"
+        android:textColor="?attr/colorPrimary"
         android:id="@+id/letter6"/>
 
     <TextView
@@ -71,7 +73,7 @@
         android:background="@drawable/letterbox"
         android:gravity="center"
         android:textSize="24dp"
-        android:textColor="#000000"
+        android:textColor="?attr/colorPrimary"
         android:id="@+id/letter7"/>
 
     <TextView
@@ -81,7 +83,7 @@
         android:background="@drawable/letterbox"
         android:gravity="center"
         android:textSize="24dp"
-        android:textColor="#000000"
+        android:textColor="?attr/colorPrimary"
         android:id="@+id/letter8"/>
 
     <TextView
@@ -91,7 +93,7 @@
         android:background="@drawable/letterbox"
         android:gravity="center"
         android:textSize="24dp"
-        android:textColor="#000000"
+        android:textColor="?attr/colorPrimary"
         android:id="@+id/letter9"/>
 
     <TextView
@@ -101,7 +103,7 @@
         android:background="@drawable/letterbox"
         android:gravity="center"
         android:textSize="24dp"
-        android:textColor="#000000"
+        android:textColor="?attr/colorPrimary"
         android:id="@+id/letter10"/>
 
 

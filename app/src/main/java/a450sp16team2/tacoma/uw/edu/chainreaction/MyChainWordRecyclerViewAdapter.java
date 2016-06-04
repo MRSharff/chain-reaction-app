@@ -1,19 +1,19 @@
 package a450sp16team2.tacoma.uw.edu.chainreaction;
 
+
+
 import android.animation.Animator;
 import android.animation.AnimatorInflater;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.os.Build;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.RotateAnimation;
 import android.widget.TextView;
 
-import java.io.Console;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -71,6 +71,8 @@ public class MyChainWordRecyclerViewAdapter extends RecyclerView.Adapter<MyChain
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         holder.mWord = mValues.get(position);
+        holder.mPosition = position;
+        holder.setCharColors();
         List<Character> theChars = new ArrayList<Character>();
         for (char c : holder.mWord.getDisplay().toCharArray()) {
             theChars.add(Character.toUpperCase(c));
@@ -91,6 +93,9 @@ public class MyChainWordRecyclerViewAdapter extends RecyclerView.Adapter<MyChain
                 //MyChainWordRecyclerViewAdapter.this.notifyDataSetChanged();
             }
         });
+        if(Build.VERSION.SDK_INT == 23 && position == mChainWordFragment.getmCurrentWord()) {
+            holder.animateView();
+        }
     }
 
     public String getPreviousWord() {
@@ -122,9 +127,9 @@ public class MyChainWordRecyclerViewAdapter extends RecyclerView.Adapter<MyChain
         public final TextView mLetter8;
         public final TextView mLetter9;
         public final TextView mLetter10;
-//        private final Drawable mLetterbox;
-        public ChainWord mWord;
 
+        public ChainWord mWord;
+        public int mPosition;
         private boolean showLength;
 
         public ViewHolder(View view) {
@@ -141,54 +146,62 @@ public class MyChainWordRecyclerViewAdapter extends RecyclerView.Adapter<MyChain
             mLetter8 = (TextView) view.findViewById(R.id.letter8);
             mLetter9 = (TextView) view.findViewById(R.id.letter9);
             mLetter10 = (TextView) view.findViewById(R.id.letter10);
-//            mLetterbox = ResourcesCompat.getDrawable(view.getResources(), R.drawable.letterbox, null);
+
         }
 
         public void animateView() {
-            Animator[] tiles = new Animator[10];
-            Animator set = (Animator) AnimatorInflater.loadAnimator(mView.getContext(),
+            ObjectAnimator[] tiles = new ObjectAnimator[10];
+            ObjectAnimator set = (ObjectAnimator) AnimatorInflater.loadAnimator(mView.getContext(),
                     R.animator.rotate_char);
             set.setTarget(mLetter1);
             tiles[0] = set;
-            set = (Animator) AnimatorInflater.loadAnimator(mView.getContext(),
+            set = (ObjectAnimator) AnimatorInflater.loadAnimator(mView.getContext(),
                     R.animator.rotate_char);
             set.setTarget(mLetter2);
+            set.setStartDelay(100);
             tiles[1] = set;
-            set = (Animator) AnimatorInflater.loadAnimator(mView.getContext(),
+            set = (ObjectAnimator) AnimatorInflater.loadAnimator(mView.getContext(),
                     R.animator.rotate_char);
             set.setTarget(mLetter3);
+            set.setStartDelay(200);
             tiles[2] = set;
-            set = (Animator) AnimatorInflater.loadAnimator(mView.getContext(),
+            set = (ObjectAnimator) AnimatorInflater.loadAnimator(mView.getContext(),
                     R.animator.rotate_char);
             set.setTarget(mLetter4);
+            set.setStartDelay(300);
             tiles[3] = set;
-            set = (Animator) AnimatorInflater.loadAnimator(mView.getContext(),
+            set = (ObjectAnimator) AnimatorInflater.loadAnimator(mView.getContext(),
                     R.animator.rotate_char);
             set.setTarget(mLetter5);
+            set.setStartDelay(400);
             tiles[4] = set;
-            set = (Animator) AnimatorInflater.loadAnimator(mView.getContext(),
+            set = (ObjectAnimator) AnimatorInflater.loadAnimator(mView.getContext(),
                     R.animator.rotate_char);
             set.setTarget(mLetter6);
+            set.setStartDelay(500);
             tiles[5] = set;
-            set = (Animator) AnimatorInflater.loadAnimator(mView.getContext(),
+            set = (ObjectAnimator) AnimatorInflater.loadAnimator(mView.getContext(),
                     R.animator.rotate_char);
             set.setTarget(mLetter7);
+            set.setStartDelay(600);
             tiles[6] = set;
-            set = (Animator) AnimatorInflater.loadAnimator(mView.getContext(),
+            set = (ObjectAnimator) AnimatorInflater.loadAnimator(mView.getContext(),
                     R.animator.rotate_char);
             set.setTarget(mLetter8);
+            set.setStartDelay(700);
             tiles[7] = set;
-            set = (Animator) AnimatorInflater.loadAnimator(mView.getContext(),
+            set = (ObjectAnimator) AnimatorInflater.loadAnimator(mView.getContext(),
                     R.animator.rotate_char);
             set.setTarget(mLetter9);
+            set.setStartDelay(800);
             tiles[8] = set;
-            set = (Animator) AnimatorInflater.loadAnimator(mView.getContext(),
+            set = (ObjectAnimator) AnimatorInflater.loadAnimator(mView.getContext(),
                     R.animator.rotate_char);
             set.setTarget(mLetter10);
+            set.setStartDelay(900);
             tiles[9] = set;
-
             AnimatorSet as = new AnimatorSet();
-            as.playSequentially(tiles);
+            as.playTogether(tiles);
             as.start();
 
         }
@@ -235,6 +248,23 @@ public class MyChainWordRecyclerViewAdapter extends RecyclerView.Adapter<MyChain
         @Override
         public String toString() {
             return super.toString() + " '" + mWord.getDisplay() + "'";
+        }
+
+        public void setCharColors() {
+            if(Build.VERSION.SDK_INT == 23) {
+                if (mPosition == mChainWordFragment.getmCurrentWord() && !mWord.isRevealed) {
+                    mLetter1.setTextColor(00000000);
+                    mLetter2.setTextColor(00000000);
+                    mLetter3.setTextColor(00000000);
+                    mLetter4.setTextColor(00000000);
+                    mLetter5.setTextColor(00000000);
+                    mLetter6.setTextColor(00000000);
+                    mLetter7.setTextColor(00000000);
+                    mLetter8.setTextColor(00000000);
+                    mLetter9.setTextColor(00000000);
+                    mLetter10.setTextColor(00000000);
+                }
+            }
         }
     }
 }
