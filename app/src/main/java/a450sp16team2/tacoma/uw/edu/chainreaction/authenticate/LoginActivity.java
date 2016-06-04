@@ -393,24 +393,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderManager.Lo
                 e2.printStackTrace();
             }
 
-//            try {
-//                mdSHA256 = MessageDigest.getInstance("SHA-256");
-//            } catch (NoSuchAlgorithmException e1) {
-//                Log.e(LOG_TAG, "Error initializing SHA256 message digest");
-//            }
-//            try {
-//                mdSHA256.update(password.getBytes("ASCII"));
-//            } catch (UnsupportedEncodingException e2) {
-//                e2.printStackTrace();
-//            }
-//
-//            byte[] data = mdSHA256.digest();
-//            try {
-//                shaHash = convertToHex(data);
-//            } catch (IOException e3) {
-//                e3.printStackTrace();
-//            }
-
             return shaHash;
         }
 

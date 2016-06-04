@@ -19,7 +19,8 @@ import a450sp16team2.tacoma.uw.edu.chainreaction.model.Highscore;
 
 
 /**
- * A simple {@link Fragment} subclass.
+ * A simple {@link Fragment} subclass which shows the local highscores using a recycler view
+ * which is filled with a SQLite query.
  */
 public class LocalHighScoreFragment extends Fragment {
 
@@ -51,28 +52,6 @@ public class LocalHighScoreFragment extends Fragment {
         super.onCreate(savedInstanceState);
         mPage = getArguments().getInt(ARG_PAGE);
     }
-
-//    @Override
-//    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-//                             Bundle savedInstanceState) {
-//        // Inflate the layout for this fragment
-//        View view = inflater.inflate(R.layout.fragment_highscore, container, false);
-//
-//        mRecyclerView = (RecyclerView) view.findViewById(R.id.highscore_recycler_view);
-//
-//        // Set the adapter
-//        if (view instanceof RecyclerView) {
-//            Context context = view.getContext();
-//            RecyclerView recyclerView = (RecyclerView) view;
-//            if (mColumnCount <= 1) {
-//                recyclerView.setLayoutManager(new LinearLayoutManager(context));
-//            } else {
-//                recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
-//            }
-//            mRecyclerView = recyclerView;
-//            recyclerView.setAdapter(new MyChainWordRecyclerViewAdapter(mWords, mListener, this));
-//        }
-//    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

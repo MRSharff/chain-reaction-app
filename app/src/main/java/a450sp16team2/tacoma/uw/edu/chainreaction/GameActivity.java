@@ -211,7 +211,6 @@ public class GameActivity extends AppCompatActivity implements ChainWordFragment
             }
         });
         gameOverMessage.show();
-        //TODO: Data lab has SQLite info, possibly for storing high scores
     }
 
     private void saveScore() {
