@@ -18,7 +18,7 @@ public class WordListGenerator {
     private Map<String, Node> myNodes;
     private InputStream myInput;
 
-    public WordListGenerator(int size, InputStream input){
+    public WordListGenerator(int size, InputStream input) throws WordListException {
         mySize = size;
         myChain = new ArrayList<Node>();
         myNodes = new HashMap<String, Node>();
@@ -38,7 +38,7 @@ public class WordListGenerator {
         this.mySize = mySize;
     }
 
-    private void initializeGrid() {
+    private void initializeGrid() throws WordListException {
         boolean b = true;
         Node n = null;
         Scanner inFile = null;
@@ -46,6 +46,10 @@ public class WordListGenerator {
         while (inFile.hasNextLine()) {
             String s = inFile.nextLine();
             String[] words = s.split(" ");
+            if (words.length != 2) {
+                throw new WordListException("Error the chainreaction.txt file has a line with an error in it\n" +
+                        "the input text file has a line with greater or fewer than 2 words.");
+            }
             if (myNodes.containsKey(words[0])) {
                 myNodes.get(words[0]).addLink(myNodes, words[1]);
             } else {
@@ -65,5 +69,11 @@ public class WordListGenerator {
             keys.remove(s);
         }
         myChain = n.buildChain(mySize);
+    }
+
+    public class WordListException extends Exception {
+        public WordListException(String message) {
+            super(message);
+        }
     }
 }

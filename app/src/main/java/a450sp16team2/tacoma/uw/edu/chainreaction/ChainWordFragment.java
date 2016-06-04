@@ -93,6 +93,9 @@ public class ChainWordFragment extends Fragment {
             setWords(mWordListGenerator.getWordList());
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (WordListGenerator.WordListException e) {
+            Log.e("", "onCreate: Failed due to an error in the text " +
+                    "file used for generation of the words list." + e.getMessage());
         }
     }
 
