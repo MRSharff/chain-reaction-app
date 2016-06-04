@@ -150,52 +150,52 @@ public class MyChainWordRecyclerViewAdapter extends RecyclerView.Adapter<MyChain
         }
 
         public void animateView() {
-            ObjectAnimator[] tiles = new ObjectAnimator[10];
-            ObjectAnimator set = (ObjectAnimator) AnimatorInflater.loadAnimator(mView.getContext(),
+            AnimatorSet[] tiles = new AnimatorSet[10];
+            AnimatorSet set = (AnimatorSet) AnimatorInflater.loadAnimator(mView.getContext(),
                     R.animator.rotate_char);
             set.setTarget(mLetter1);
             tiles[0] = set;
-            set = (ObjectAnimator) AnimatorInflater.loadAnimator(mView.getContext(),
+            set = (AnimatorSet) AnimatorInflater.loadAnimator(mView.getContext(),
                     R.animator.rotate_char);
             set.setTarget(mLetter2);
             set.setStartDelay(100);
             tiles[1] = set;
-            set = (ObjectAnimator) AnimatorInflater.loadAnimator(mView.getContext(),
+            set = (AnimatorSet) AnimatorInflater.loadAnimator(mView.getContext(),
                     R.animator.rotate_char);
             set.setTarget(mLetter3);
             set.setStartDelay(200);
             tiles[2] = set;
-            set = (ObjectAnimator) AnimatorInflater.loadAnimator(mView.getContext(),
+            set = (AnimatorSet) AnimatorInflater.loadAnimator(mView.getContext(),
                     R.animator.rotate_char);
             set.setTarget(mLetter4);
             set.setStartDelay(300);
             tiles[3] = set;
-            set = (ObjectAnimator) AnimatorInflater.loadAnimator(mView.getContext(),
+            set = (AnimatorSet) AnimatorInflater.loadAnimator(mView.getContext(),
                     R.animator.rotate_char);
             set.setTarget(mLetter5);
             set.setStartDelay(400);
             tiles[4] = set;
-            set = (ObjectAnimator) AnimatorInflater.loadAnimator(mView.getContext(),
+            set = (AnimatorSet) AnimatorInflater.loadAnimator(mView.getContext(),
                     R.animator.rotate_char);
             set.setTarget(mLetter6);
             set.setStartDelay(500);
             tiles[5] = set;
-            set = (ObjectAnimator) AnimatorInflater.loadAnimator(mView.getContext(),
+            set = (AnimatorSet) AnimatorInflater.loadAnimator(mView.getContext(),
                     R.animator.rotate_char);
             set.setTarget(mLetter7);
             set.setStartDelay(600);
             tiles[6] = set;
-            set = (ObjectAnimator) AnimatorInflater.loadAnimator(mView.getContext(),
+            set = (AnimatorSet) AnimatorInflater.loadAnimator(mView.getContext(),
                     R.animator.rotate_char);
             set.setTarget(mLetter8);
             set.setStartDelay(700);
             tiles[7] = set;
-            set = (ObjectAnimator) AnimatorInflater.loadAnimator(mView.getContext(),
+            set = (AnimatorSet) AnimatorInflater.loadAnimator(mView.getContext(),
                     R.animator.rotate_char);
             set.setTarget(mLetter9);
             set.setStartDelay(800);
             tiles[8] = set;
-            set = (ObjectAnimator) AnimatorInflater.loadAnimator(mView.getContext(),
+            set = (AnimatorSet) AnimatorInflater.loadAnimator(mView.getContext(),
                     R.animator.rotate_char);
             set.setTarget(mLetter10);
             set.setStartDelay(900);
