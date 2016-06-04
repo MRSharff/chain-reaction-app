@@ -8,8 +8,8 @@ android {
         applicationId "a450sp16team2.tacoma.uw.edu.chainreaction"
         minSdkVersion 15
         targetSdkVersion 23
-        versionCode 1
-        versionName "1.0"
+        versionCode 2
+        versionName "2.0"
     }
     buildTypes {
         release {
@@ -27,4 +27,5 @@ dependencies {
     compile 'com.android.support:support-v4:23.4.0'
     compile 'com.android.support:recyclerview-v7:23.4.0'
     compile 'com.android.support:support-v13:23.4.0'
+    androidTestCompile fileTree(dir: 'libs', include: 'robotium-solo-5.5.4.jar')
 }
