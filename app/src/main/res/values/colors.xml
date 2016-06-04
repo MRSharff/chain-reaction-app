@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="multiplayer_container_color">#ff424242</color>
+
     <color name="colorPrimary">#009688</color>
     <color name="colorLightPrimary">#B2DFDB</color>
     <color name="colorPrimaryDark">#00796B</color>

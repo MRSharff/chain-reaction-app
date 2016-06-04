@@ -1,7 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- Base application theme. -->
+    <!--<style name="AppTheme.AlertDialog" parent="Theme.AppCompat.Dialog.Alert">-->
+        <!--&lt;!&ndash; Customize your theme here. &ndash;&gt;-->
+        <!--<item name="windowNoTitle">true</item>-->
+        <!--<item name="windowActionBar">false</item>-->
+        <!--<item name="colorPrimary">?attr/colorPrimary</item>-->
+        <!--<item name="colorPrimaryDark">?attr/colorPrimaryDark</item>-->
+        <!--&lt;!&ndash;<item name="colorAccent">?attr/colorAccent</item>&ndash;&gt;-->
+        <!--<item name="colorButtonNormal">?attr/colorPrimaryDark</item>-->
+        <!--<item name="background">?attr/colorPrimary</item>-->
+        <!--<item name="colorControlNormal">?attr/colorAccent</item>-->
+        <!--<item name="colorControlActivated">?attr/colorAccent</item>-->
+        <!--<item name="colorControlHighlight">?attr/colorAccent</item>-->
+    <!--</style>-->
+
+    <!--&lt;!&ndash; Base application theme. &ndash;&gt;-->
     <style name="AppTheme.AlertDialog" parent="Theme.AppCompat.Dialog.Alert">
         <!-- Customize your theme here. -->
         <item name="windowNoTitle">true</item>

@@ -40,7 +40,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:gravity="center_horizontal"
-        android:background="@color/material_grey_800"
+        android:background="@color/multiplayer_container_color"
 
         android:paddingTop="0dp">
 

@@ -67,13 +67,16 @@ public class GameActivity extends AppCompatActivity implements ChainWordFragment
         // get prompts.xml view
         final ChainWord word = holder.mWord;
         if (myChainWordRecyclerViewAdapter.isCurrent(word)) {
-            LayoutInflater li = (LayoutInflater) getApplicationContext().getSystemService
-                    (Context.LAYOUT_INFLATER_SERVICE);
+            LayoutInflater li = (LayoutInflater) getApplicationContext()
+                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
             View promptsView = li.inflate(R.layout.prompt, null);
 
             // Get the current theme key
             String theme = PreferenceManager.getDefaultSharedPreferences(this)
                     .getString("pref_theme_key", "AppTheme");
+
+//            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
 
             AlertDialog.Builder alertDialogBuilder = null;
 

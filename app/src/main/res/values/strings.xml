@@ -4,6 +4,9 @@
     <string name="title_chain">Chain</string>
     <string name="title_reaction">Reaction</string>
 
+    <string name="coming_soon">This feature is coming soon!</string>
+    <string name="ok">Okay</string>
+
     <string name="prompt_username">Username</string>
     <string name="prompt_password">Password</string>
     <string name="prompt_retype_password">Retype Password</string>

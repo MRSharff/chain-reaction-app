@@ -1,6 +1,8 @@
 package a450sp16team2.tacoma.uw.edu.chainreaction;
 
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -64,14 +66,31 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
         AppCompatButton singlePlayerButton = (AppCompatButton) findViewById(R.id.btn_singleplayer);
-        AppCompatButton settingsButton = (AppCompatButton) findViewById(R.id.btn_settings);
+        AppCompatButton playOnlineButton = (AppCompatButton) findViewById(R.id.btn_online);
+        AppCompatButton playOfflineButton = (AppCompatButton) findViewById(R.id.btn_offline);
         AppCompatButton highscoreButton = (AppCompatButton) findViewById(R.id.btn_highscores);
+        AppCompatButton settingsButton = (AppCompatButton) findViewById(R.id.btn_settings);
 
-        if (singlePlayerButton != null && settingsButton != null && highscoreButton != null) {
+
+
+        if (singlePlayerButton != null && settingsButton != null && highscoreButton != null
+                && playOnlineButton != null && playOfflineButton != null) {
             singlePlayerButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     startSinglePlayer();
+                }
+            });
+            playOnlineButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    comingSoon();
+                }
+            });
+            playOfflineButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    comingSoon();
                 }
             });
             settingsButton.setOnClickListener(new View.OnClickListener() {
@@ -86,6 +105,7 @@ public class HomeActivity extends AppCompatActivity {
                     startHighscore();
                 }
             });
+
         } else {
             Log.e(LOG_TAG, "A button was null");
         }
@@ -127,6 +147,18 @@ public class HomeActivity extends AppCompatActivity {
 //        db.dropTables();
         Intent intent = new Intent(this, HighscoreActivity.class);
         startActivity(intent);
+    }
+
+    private void comingSoon() {
+        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(this);
+        alertBuilder.setMessage(R.string.coming_soon)
+            .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    //do nothing
+                }
+            });
+        AlertDialog dialog = alertBuilder.create();
+        dialog.show();
     }
 
     public static void chainReactionSetTheme(Context theContext) {
