@@ -17,7 +17,7 @@
 
     <string name="cancel">Cancel</string>
 
-    <string name="word_hint_dialog">Current phrase:</string>
+    <string name="word_hint_dialog">Current phrase: %1$s %2$s</string>
     <string name="guess_dialog_guess">Guess</string>
 
     <string name="login">Login</string>

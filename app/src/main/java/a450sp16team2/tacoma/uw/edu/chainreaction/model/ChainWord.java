@@ -84,6 +84,10 @@ public class ChainWord implements Serializable{
         return new String(mWord);
     }
 
+    public char[] getCharSet() {
+        return mDisplay;
+    }
+
     /**
      * gets the display string for the word.
      * @return the letters currently displayed

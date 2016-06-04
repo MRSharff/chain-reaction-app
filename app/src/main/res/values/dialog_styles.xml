@@ -16,7 +16,7 @@
     <!--</style>-->
 
     <!--&lt;!&ndash; Base application theme. &ndash;&gt;-->
-    <style name="AppTheme.AlertDialog" parent="Theme.AppCompat.Dialog.Alert">
+    <style name="AppTheme.AlertDialog" parent="Theme.AppCompat.Dialog">
         <!-- Customize your theme here. -->
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>

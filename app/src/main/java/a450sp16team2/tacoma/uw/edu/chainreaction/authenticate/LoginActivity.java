@@ -311,7 +311,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderManager.Lo
         private final static String AUTHENTICATE_URL =
                 "http://cssgate.insttech.washington.edu/~mrsharff/Android/crlogin.php?";
 
+        /** Username to login with */
         private final String mUsername;
+
+        /** User password to login with */
         private final String mPassword;
 
         private Context mContext;
@@ -378,6 +381,11 @@ public class LoginActivity extends AppCompatActivity implements LoaderManager.Lo
             showProgress(false);
         }
 
+        /**
+         * Returns a SHA256 hash of the password for storing on the remote authentication database.
+         * @param password the password string to hash
+         * @return the hash
+         */
         private String getSHA256(String password) {
             MessageDigest mdSHA256;
             String shaHash = null;
@@ -396,7 +404,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderManager.Lo
             return shaHash;
         }
 
-        private String buildLoginURL(String password) {
+        /**
+         * Builds the login url to query the server.
+         * @param passwordHash the password hash
+         * @return url query string
+         */
+        private String buildLoginURL(String passwordHash) {
 
             StringBuilder sb = new StringBuilder(AUTHENTICATE_URL);
 
@@ -405,7 +418,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderManager.Lo
                 sb.append(mUsername);
 
                 sb.append("&pwd=");
-                sb.append(password);
+                sb.append(passwordHash);
 
                 Log.i("LoginURL", sb.toString());
 
@@ -416,6 +429,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderManager.Lo
             return sb.toString();
         }
 
+        /**
+         * Converts byte data to a hex string to be used in SHA 256 hash generation.
+         * @param theData The data to convert to hash.
+         * @return A hex string
+         * @throws java.io.IOException
+         */
         private String convertToHex(byte[] theData) throws java.io.IOException {
             StringBuffer stringBuffer = new StringBuffer();
             String hex;

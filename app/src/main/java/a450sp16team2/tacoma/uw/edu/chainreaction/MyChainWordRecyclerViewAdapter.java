@@ -98,17 +98,41 @@ public class MyChainWordRecyclerViewAdapter extends RecyclerView.Adapter<MyChain
         }
     }
 
+    /**
+     * Returns the previous word guessed or revealed.
+     * @return previous word
+     */
     public String getPreviousWord() {
         return (mValues.get(mChainWordFragment.getmCurrentWord() - 1).getWord());
     }
 
-    public String getHintAndBlank() {
-        Log.d(LOG_TAG, "mCurrentWord is " + mChainWordFragment.getmCurrentWord());
-        int underscoreCount = mValues.get(mChainWordFragment.getmCurrentWord()).getWord().length() -
-                mValues.get(mChainWordFragment.getmCurrentWord()).getDisplay().length();
-        return mValues.get(mChainWordFragment.getmCurrentWord()).getDisplay()
-                + (new String(new char[underscoreCount]).replace("\0", "_"));
+    /**
+     * Returns the current word as it is revealed so far.
+     * @return displayed current word
+     */
+    public String getCurrentlyDisplayed() {
+        return mValues.get(mChainWordFragment.getmCurrentWord()).getDisplay();
     }
+
+//    /**
+//     *
+//     * @return
+//     */
+//    public String getHintAndBlank() {
+//        Log.d(LOG_TAG, String.valueOf(mValues.get(mChainWordFragment.getmCurrentWord()).getCharSet()).replaceAll("[^a-z]", "_"));
+//        Log.d(LOG_TAG, "mCurrentWord is " + mValues.get(mChainWordFragment.getmCurrentWord()).getWord());
+//        Log.d(LOG_TAG, "mCurrentWord display is " + mValues.get(mChainWordFragment.getmCurrentWord()).getDisplay().replaceAll("[^a-z]", "\0"));
+//        int underscoreCount = mValues.get(mChainWordFragment.getmCurrentWord()).getWord().length() -
+//                mValues.get(mChainWordFragment.getmCurrentWord()).getDisplay().length();
+////        char[] underscorechars = new char[underscoreCount];
+//        String underscores = new String(new char[underscoreCount]).replace("\0", "_") + '\0';
+//        Log.d(LOG_TAG, "Underscores: " + underscoreCount + underscores);
+//        String result = mValues.get(mChainWordFragment.getmCurrentWord()).getDisplay()
+//                + underscores;
+//        Log.d(LOG_TAG, "return string is " + result);
+//
+//        return result;
+//    }
 
     @Override
     public int getItemCount() {

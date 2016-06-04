@@ -4,8 +4,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
-    android:padding="10dp"
-    android:theme="@style/AppTheme.AlertDialog">
+    android:padding="10dp">
 
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
@@ -17,8 +16,7 @@
             android:layout_height="wrap_content"
             android:inputType="text"
             android:maxLines="1"
-            android:maxLength="25"
-            android:textColor="?attr/colorAccent">
+            android:maxLength="25">
             <requestFocus />
         </android.support.design.widget.TextInputEditText>
     </android.support.design.widget.TextInputLayout>

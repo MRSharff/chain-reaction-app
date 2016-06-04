@@ -67,8 +67,9 @@ public class GameActivity extends AppCompatActivity implements ChainWordFragment
         // get prompts.xml view
         final ChainWord word = holder.mWord;
         if (myChainWordRecyclerViewAdapter.isCurrent(word)) {
-            LayoutInflater li = (LayoutInflater) getApplicationContext()
-                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+//            LayoutInflater li = (LayoutInflater) getApplicationContext()
+//                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE); // must add a theme to prompt base viewgroup
+            LayoutInflater li = this.getLayoutInflater();
 
             View promptsView = li.inflate(R.layout.prompt, null);
 
@@ -116,8 +117,12 @@ public class GameActivity extends AppCompatActivity implements ChainWordFragment
 
             //Set title to show hint so far
             String previousWord = myChainWordRecyclerViewAdapter.getPreviousWord();
-            alertDialogBuilder.setTitle(getString(R.string.word_hint_dialog)
-                    + previousWord + " " + myChainWordRecyclerViewAdapter.getHintAndBlank());
+            String currentWord = myChainWordRecyclerViewAdapter.getCurrentlyDisplayed();
+            String title = String.format(getString(R.string.word_hint_dialog),
+                    previousWord,
+                    currentWord);
+
+            alertDialogBuilder.setTitle(title);
 
             alertDialogBuilder
                     .setPositiveButton(getString(R.string.guess_dialog_guess),
