@@ -309,8 +309,6 @@ public class RegisterActivity extends AppCompatActivity  implements LoaderManage
                 startActivity(intent);
                 finish();
             } else {
-                // Something went bad
-                // TODO: Error handling from returned php
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
                 mPasswordView.requestFocus();
             }

@@ -114,22 +114,6 @@ public class HomeActivity extends AppCompatActivity {
         String username = getSharedPreferences(getString(R.string.LOGIN_PREFS),Context.MODE_PRIVATE).getString(getString(R.string.LOGGEDIN_USERNAME), "OFFLINEUSER");
         Toast.makeText(this, String.format(getString(R.string.login_toast), username), Toast.LENGTH_SHORT).show();
 
-        //TODO: Update functionality on Online play to grey out button if no internet connection
-        //TODO: Or, have it pop up an alert dialog saying that we need an internet connection
-
-//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
-//
-//        getSupportActionBar().hide();
-
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
     }
 
     private void startSinglePlayer() {
